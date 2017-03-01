@@ -13,5 +13,5 @@ TODO
 - Create basic application
 - Setup website
 - Establish goals
-- Write down editorial guidelines to avoid abuse
+- Write down editorial guidelines / code of conduct /values
 - Investigate pulling infromation from https://github.com/sindresorhus/awesome
