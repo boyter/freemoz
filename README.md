@@ -14,3 +14,4 @@ TODO
 - Setup website
 - Establish goals
 - Write down editorial guidelines to avoid abuse
+- Investigate pulling infromation from https://github.com/sindresorhus/awesome
