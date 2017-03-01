@@ -13,5 +13,5 @@ TODO
 - Create basic application
 - Setup website
 - Establish goals
-- Write down editorial guidelines / code of conduct /values
+- Write down editorial guidelines / code of conduct / values probably based on http://contributor-covenant.org/version/1/4/
 - Investigate pulling infromation from https://github.com/sindresorhus/awesome
