@@ -1,4 +1,4 @@
-# freemoz
+# Freemoz
 A spiritual sucessor to dmoz.org
 
 
