@@ -5,6 +5,9 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static spark.Spark.halt;
 
 public class EditorService {
@@ -16,6 +19,25 @@ public class EditorService {
         }
 
         return new ModelAndView(null, "login.ftl");
+    }
+
+    public static ModelAndView doLogin(Request request, Response response) {
+        if (getAuthenticatedUser(request) != null) {
+            response.redirect("/");
+            halt();
+            return null;
+        }
+
+        Map<String, Object> sparkModel = new HashMap<>();
+
+        if (request.queryParams().contains("loginPassword")) {
+            addAuthenticatedUser(request);
+            response.redirect("/");
+            halt();
+        }
+
+
+        return new ModelAndView(sparkModel, "login.ftl");
     }
 
     private static void addAuthenticatedUser(Request request) {
