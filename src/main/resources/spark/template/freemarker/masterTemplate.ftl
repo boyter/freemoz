@@ -9,10 +9,6 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel='shortcut icon' type='image/x-icon' href='/img/favicon.ico' />
-    <script language="javascript" type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
-    <script language="javascript" type="text/javascript" src="/js/underscore-min.js"></script>
-    <script language="javascript" type="text/javascript" src="/js/jquery.flot.min.js"></script>
-    <script language="javascript" type="text/javascript" src="/js/typeahead.js"></script>
     <script language="javascript" type="text/javascript" src="/js/script.js"></script>
   </head>
   <body>
@@ -42,7 +38,7 @@
               <li><a href="#">About</a></li>
               <li><a href="#">Become an Editor</a></li>
               <li><a href="#">Suggest a Site</a></li>
-              <li><a href="#">Login</a></li>
+              <li><a href="/login/">Login</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->

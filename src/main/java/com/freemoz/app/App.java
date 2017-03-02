@@ -1,5 +1,6 @@
 package com.freemoz.app;
 
+import com.freemoz.app.service.EditorService;
 import spark.ModelAndView;
 import spark.Spark;
 import spark.template.freemarker.FreeMarkerEngine;
@@ -22,5 +23,6 @@ public class App {
         }, new FreeMarkerEngine());
 
 
+        get( "/login/", ((request, response) -> EditorService.login(request, response)), new FreeMarkerEngine());
     }
 }
