@@ -21,3 +21,16 @@ GOALS
 - A new version of DMOZ
 - Data to be exported in a way that is simple for anyone to import/use update
 - Project must be forkable with minimum of effort
+- Self contained. Must be able to stand up a new instance of freemoz with minimum of effort
+
+
+### Self Contained
+
+To make freemoz self contained the following assumptions/solutions are going to be made.
+
+Freemoz is a read heavy application. Delayed updates from edits are acceptable.
+
+Going to use Java 8 as the runtime envrionment using Spark (http://sparkjava.com/) framework. This means
+it will be possible to run Freemoz on any machine capable of running Java. Going to use SQLite
+as the database. This means that there is no external database requirement, however in the interests
+of scale must ensure that it is possible to switch this out at a later date.
