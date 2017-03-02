@@ -1,7 +1,7 @@
 # Freemoz
 A spiritual sucessor to dmoz.org
 
-![Build Status](https://circleci.com/gh/boyter/freemoz/tree/master.svg?style=shield&circle-token=:circle-token)
+[![Build Status](https://circleci.com/gh/boyter/freemoz/tree/master.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/boyter/freemoz/tree/master)
 
 DONE
 - Ordered domain
