@@ -26,7 +26,7 @@ public class UserDAO {
         this.helpers = helpers;
     }
 
-    public synchronized UserDTO getUserByUsernamePassword(String username, String password) {
+    public synchronized UserDTO getUserByUsername(String username) {
         UserDTO userDTO = null;
         Gson gson = new Gson();
 
@@ -36,9 +36,8 @@ public class UserDAO {
 
         try {
             connection = this.dbConfig.getConnection();
-            preparedStatement = connection.prepareStatement("select username, password, data from \"user\" where username = ? and password = ?;");
+            preparedStatement = connection.prepareStatement("select username, password, data from \"user\" where username = ?;");
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
 
             resultSet = preparedStatement.executeQuery();
 

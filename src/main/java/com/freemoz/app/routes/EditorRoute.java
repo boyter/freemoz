@@ -1,6 +1,8 @@
 package com.freemoz.app.routes;
 
 
+import com.freemoz.app.dto.UserDTO;
+import com.freemoz.app.service.EditorService;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -30,14 +32,38 @@ public class EditorRoute {
 
         Map<String, Object> sparkModel = new HashMap<>();
 
-        if (request.queryParams().contains("loginPassword")) {
-            addAuthenticatedUser(request);
-            response.redirect("/");
+        if (!request.queryParams().contains("loginUsername") || !request.queryParams().contains("loginPassword")) {
+            response.redirect("/login/");
             halt();
+            return null;
         }
 
+        String username = request.queryParams("loginUsername");
+        String password = request.queryParams("loginPassword");
 
-        return new ModelAndView(sparkModel, "login.ftl");
+        EditorService editorService = new EditorService();
+
+        UserDTO user = editorService.loginUser(username, password);
+
+        if (user == null) {
+            response.redirect("/login/");
+            halt();
+            return null;
+        }
+
+        addAuthenticatedUser(request);
+
+        response.redirect("/");
+        halt();
+        return null;
+    }
+
+    public static ModelAndView logout(Request request, Response response) {
+        removeAuthenticatedUser(request);
+
+        response.redirect("/");
+        halt();
+        return null;
     }
 
     private static void addAuthenticatedUser(Request request) {

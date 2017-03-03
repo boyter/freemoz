@@ -54,6 +54,12 @@
             <version>2.4</version>
             <scope>compile</scope>
         </dependency>
+        <!-- Password hashes / Security -->
+        <dependency>
+            <groupId>de.svenkubiak</groupId>
+            <artifactId>jBCrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
         <!-- Unit testing-->
         <dependency>
             <groupId>org.mockito</groupId>

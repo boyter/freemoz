@@ -25,6 +25,7 @@ public class App {
 
         get( "/login/", (EditorRoute::login), new FreeMarkerEngine());
         post( "/login/", (EditorRoute::doLogin), new FreeMarkerEngine());
+        get( "/logout/", (EditorRoute::logout), new FreeMarkerEngine());
     }
 
     private static void preStart() {
