@@ -1,4 +1,4 @@
-package com.freemoz.app.service;
+package com.freemoz.app.routes;
 
 
 import spark.ModelAndView;
@@ -10,7 +10,7 @@ import java.util.Map;
 
 import static spark.Spark.halt;
 
-public class EditorService {
+public class EditorRoute {
     public static ModelAndView login(Request request, Response response) {
         if (getAuthenticatedUser(request) != null) {
             response.redirect("/");
