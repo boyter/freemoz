@@ -16,6 +16,7 @@ TODO
 - Setup website
 - Establish goals
 - Investigate pulling infromation from https://github.com/sindresorhus/awesome
+- Investigate https://github.com/kremso/dmoz-parser for parsing existing dmoz data
 
 GOALS
 - A new version of DMOZ
