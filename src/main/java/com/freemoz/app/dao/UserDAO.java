@@ -67,7 +67,7 @@ public class UserDAO {
 
         try {
             connection = this.dbConfig.getConnection();
-            preparedStatement = connection.prepareStatement("CREATE TABLE  IF NOT EXISTS \"main\".\"user\" (\"username\" VARCHAR PRIMARY KEY  NOT NULL , \"password\" VARCHAR NOT NULL , \"data\" TEXT);");
+            preparedStatement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS \"main\".\"user\" (\"username\" VARCHAR PRIMARY KEY  NOT NULL , \"password\" VARCHAR NOT NULL , \"data\" TEXT);");
             preparedStatement.execute();
 
         }
