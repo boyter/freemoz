@@ -3,20 +3,33 @@ package com.freemoz.app.service;
 
 import com.freemoz.app.config.IDatabaseConfig;
 import com.freemoz.app.config.SQLiteDatabaseConfig;
+import com.freemoz.app.config.Values;
 import com.freemoz.app.dao.UserDAO;
 import com.freemoz.app.util.Helpers;
+import com.freemoz.app.util.Properties;
 
 public class Singleton {
-    private static IDatabaseConfig databaseConfig = null;
+    private static IDatabaseConfig userDatabaseConfig = null;
+    private static IDatabaseConfig contentDatabaseConfig = null;
     private static UserDAO userDAO = null;
     private static Helpers helpers = null;
 
-    public synchronized static IDatabaseConfig getDatabaseConfig() {
-        if (databaseConfig == null) {
-            databaseConfig = new SQLiteDatabaseConfig();
+    public synchronized static IDatabaseConfig getUserDatabaseConfig() {
+        if (userDatabaseConfig == null) {
+            String sqliteFile = (String) Properties.getProperties().getOrDefault(Values.USER_SQLITE_FILE, Values.DEFAULT_USER_SQLITE_FILE);
+            userDatabaseConfig = new SQLiteDatabaseConfig(sqliteFile);
         }
 
-        return databaseConfig;
+        return userDatabaseConfig;
+    }
+
+    public synchronized static IDatabaseConfig getContentDatabaseConfig() {
+        if (contentDatabaseConfig == null) {
+            String sqliteFile = (String) Properties.getProperties().getOrDefault(Values.CONTENT_SQLITE_FILE, Values.DEFAULT_CONTENT_SQLITE_FILE);
+            contentDatabaseConfig = new SQLiteDatabaseConfig(sqliteFile);
+        }
+
+        return contentDatabaseConfig;
     }
 
     public synchronized static UserDAO getUserDAO() {

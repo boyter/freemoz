@@ -2,8 +2,15 @@ package com.freemoz.app.config;
 
 public class Values {
     public static final String PROPERTIES_FILE_NAME = "freemoz.properties";
-    public static final String SQLITE_FILE = "sqlite_file";
-    public static final String DEFAULT_SQLITE_FILE = "freemoz.sqlite";
+
+    // User Database
+    public static final String USER_SQLITE_FILE = "user_sqlite_file";
+    public static final String DEFAULT_USER_SQLITE_FILE = "freemoz-user.sqlite";
+
+    // Content Database
+    public static final String CONTENT_SQLITE_FILE = "content_sqlite_file";
+    public static final String DEFAULT_CONTENT_SQLITE_FILE = "freemoz-content.sqlite";
+
 
     public static final String EMPTY_STRING = "";
 }

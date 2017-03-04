@@ -18,7 +18,7 @@ public class UserDAO {
     private Helpers helpers;
 
     public UserDAO() {
-        this(Singleton.getDatabaseConfig(), Singleton.getHelpers());
+        this(Singleton.getUserDatabaseConfig(), Singleton.getHelpers());
     }
 
     public UserDAO(IDatabaseConfig dbConfig, Helpers helpers) {
