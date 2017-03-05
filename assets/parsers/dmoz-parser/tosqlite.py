@@ -4,7 +4,7 @@ import json
 db = sqlite3.connect('freemoz-content.sqlite')
 
 cursor = db.cursor()
-cursor.execute('''CREATE TABLE IF NOT EXISTS "main"."content" ("topic" VARCHAR, "title" VARCHAR, "description" TEXT, "url" VARCHAR, "data" TEXT);''')
+cursor.execute('''CREATE  TABLE "main"."content" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , "parentid" INTEGER, "topic" VARCHAR, "title" VARCHAR, "description" TEXT, "url" VARCHAR, "data" TEXT)''')
 db.commit()
 
 
@@ -16,7 +16,7 @@ for line in open('parsed.json'):
     content = json.loads(line)
 
     if 'topic' in content and 'd:Title' in content and 'd:Description' in content and 'url' in content:
-        cursor.execute('''INSERT INTO "main"."content" ("topic","title","description","url","data") VALUES (?,?,?,?,?);''', (content['topic'], content['d:Title'], content['d:Description'], content['url'], '{}'))
+        cursor.execute('''INSERT INTO "main"."content" ("parentid","topic","title","description","url","data") VALUES (?,?,?,?,?,?)''', (-1, content['topic'], content['d:Title'], content['d:Description'], content['url'], '{}'))
     else:
         print 'nope'
 
