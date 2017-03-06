@@ -33,7 +33,7 @@ def insert_topics(topics):
         cursor.execute('''INSERT INTO "main"."structure" ("parentid","topic") VALUES (?,?)''', (-1, topic))
         db.commit()
 
-        if i % 100 == 0:
+        if i % 1000 == 0:
             db.commit()
     db.commit()
 
