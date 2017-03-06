@@ -19,7 +19,7 @@ public class App {
     public static void main( String[] args ) {
         // Database migrations happen before we start
         preStart();
-        
+
         Spark.port(getServerPort());
         Spark.staticFileLocation("/public");
 

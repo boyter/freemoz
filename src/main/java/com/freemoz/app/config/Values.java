@@ -13,6 +13,8 @@ public class Values {
 
     public static final String SERVER_PORT = "server_port";
     public static final int DEFAULT_SERVER_PORT = 8080;
+    public static final String SERVER_TYPE = "server_type";
+    public static final String DEFAULT_SERVER_TYPE = "authoring";
 
 
     public static final String EMPTY_STRING = "";
