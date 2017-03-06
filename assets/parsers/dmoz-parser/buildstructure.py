@@ -1,5 +1,4 @@
 import sqlite3
-import json
 
 
 def create_table():
@@ -17,8 +16,8 @@ def get_all_topics():
 
     topics = []
 
-    for row in cursor.execute('SELECT DISTINCT topic FROM content'):
-
+    print 'Fetching all topics...'
+    for row in cursor.execute('''SELECT DISTINCT topic FROM content'''):
         topic = row[0]
         topics.append(topic)
 
@@ -33,14 +32,49 @@ def insert_topics(topics):
         cursor.execute('''INSERT INTO "main"."structure" ("parentid","topic") VALUES (?,?)''', (-1, topic))
         db.commit()
 
-        if i % 1000 == 0:
+        if i % 10000 == 0:
+            print i, topic
             db.commit()
     db.commit()
+
+
+def find_parent(path):
+    db = sqlite3.connect('freemoz-content.sqlite')
+
+    cursor = db.cursor()
+    haveparent = False
+
+    for row in cursor.execute('''SELECT id FROM structure WHERE topic = ?''', (path,)):
+        parent = row[0]
+        return parent
+    return None
+
+def update_parent(topic, parentid):
+    db = sqlite3.connect('freemoz-content.sqlite')
+    cursor = db.cursor()
+
+    cursor.execute('''UPDATE structure SET parentid = ? WHERE topic = ?''', (parentid, topic))
+    db.commit()
+
+
+def build_relations(topics):
+    for topic in topics:
+        depth = len(topic.split('/'))
+        parent = None
+
+        if depth != 3:
+            for x in range(depth-1, 0, -1):
+                root = '/'.join(topic.split('/')[:x])
+                parent = find_parent(root)
+
+                if parent:
+                    break
+
+        update_parent(topic=topic, parentid=parent)
+        print 'Parent for ', topic, ' is ', parent
 
 
 create_table()
 topics = get_all_topics()
 insert_topics(topics=topics)
-
-# depth = len(topic.split('/'))
-# root = '/'.join(topic.split('/')[:len(topic.split('/')) - 1])
+build_relations(topics)
