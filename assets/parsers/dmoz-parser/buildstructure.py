@@ -42,12 +42,12 @@ def find_parent(path):
     db = sqlite3.connect('freemoz-content.sqlite')
 
     cursor = db.cursor()
-    haveparent = False
 
     for row in cursor.execute('''SELECT id FROM structure WHERE topic = ?''', (path,)):
         parent = row[0]
         return parent
     return None
+
 
 def update_parent(topic, parentid):
     db = sqlite3.connect('freemoz-content.sqlite')
