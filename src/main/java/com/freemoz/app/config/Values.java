@@ -11,6 +11,9 @@ public class Values {
     public static final String CONTENT_SQLITE_FILE = "content_sqlite_file";
     public static final String DEFAULT_CONTENT_SQLITE_FILE = "freemoz-content.sqlite";
 
+    public static final String SERVER_PORT = "server_port";
+    public static final int DEFAULT_SERVER_PORT = 8080;
+
 
     public static final String EMPTY_STRING = "";
 }

@@ -19,6 +19,19 @@ public class Helpers {
         return false;
     }
 
+    public static int tryParseInt(String toParse, int defaultValue) {
+        int result;
+
+        try {
+            result = Integer.parseInt(toParse);
+        }
+        catch(NumberFormatException ex){
+            result = defaultValue;
+        }
+
+        return result;
+    }
+
     public void closeQuietly(ResultSet resultSet) {
         try {
             resultSet.close();
