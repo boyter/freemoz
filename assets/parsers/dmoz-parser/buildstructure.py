@@ -38,15 +38,23 @@ def insert_topics(topics):
     db.commit()
 
 
-def find_parent(path):
-    db = sqlite3.connect('freemoz-content.sqlite')
 
+find_parent_cache = {}
+def find_parent(path):
+
+    if path in find_parent_cache:
+        return find_parent_cache[path]
+
+    db = sqlite3.connect('freemoz-content.sqlite')
     cursor = db.cursor()
+
+    parent = None
 
     for row in cursor.execute('''SELECT id FROM structure WHERE topic = ?''', (path,)):
         parent = row[0]
-        return parent
-    return None
+
+    find_parent_cache[path] = parent
+    return parent
 
 
 def update_parent(topic, parentid):
@@ -72,7 +80,6 @@ def build_relations(topics):
 
         update_parent(topic=topic, parentid=parent)
         print 'Parent for ', topic, ' is ', parent
-
 
 create_table()
 topics = get_all_topics()
