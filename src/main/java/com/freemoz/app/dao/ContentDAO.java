@@ -24,7 +24,7 @@ public class ContentDAO {
         this.helpers = helpers;
     }
 
-    public List<String> getSubcategories() {
+    public List<String> getSubcategories(String category) {
         List<String> categories = new ArrayList<>();
 
         Connection connection;
@@ -33,9 +33,8 @@ public class ContentDAO {
 
         try {
             connection = this.dbConfig.getConnection();
-            preparedStatement = connection.prepareStatement("select topic from \"structure\" where parentid = ? ORDER by topic;");
-            preparedStatement.setInt(1, 1);
-            //preparedStatement.setInt(1, 12);
+            preparedStatement = connection.prepareStatement("select * from structure where parentid = (select id from structure where topic = ? limit 1);");
+            preparedStatement.setString(1, category);
 
             resultSet = preparedStatement.executeQuery();
 

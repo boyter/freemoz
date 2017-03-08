@@ -6,11 +6,6 @@ To build the database you need to first do the following,
 1. Download DMOZ data
 2. Run the dmoz-parser against the content file to produce parsed.json
 3. Run tosqlite.py 
-4. Run buildstructure.py (this will take some time)
+4. Run buildstructure.py
 
 The result will be a single sqlite file named freemoz-content.sqlite which will contain
-everything required to display dmoz data.
-
-These scripts are not really designed for reuse and as such are written with the idea to run once.
-
-TODO expand out the details in here.
