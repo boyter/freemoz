@@ -1,6 +1,7 @@
 package com.freemoz.app;
 
 import com.freemoz.app.config.Values;
+import com.freemoz.app.routes.ContentRoute;
 import com.freemoz.app.routes.EditorRoute;
 import com.freemoz.app.service.Singleton;
 import com.freemoz.app.util.Helpers;
@@ -31,6 +32,11 @@ public class App {
         get( "/login/", (EditorRoute::login), new FreeMarkerEngine());
         post( "/login/", (EditorRoute::doLogin), new FreeMarkerEngine());
         get( "/logout/", (EditorRoute::logout), new FreeMarkerEngine());
+
+
+        get("/arts/*", (request, response) -> ContentRoute.getCategory(request, response, "arts"), new FreeMarkerEngine());
+
+
     }
 
     private static int getServerPort() {

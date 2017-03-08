@@ -4,6 +4,7 @@ package com.freemoz.app.service;
 import com.freemoz.app.config.IDatabaseConfig;
 import com.freemoz.app.config.SQLiteDatabaseConfig;
 import com.freemoz.app.config.Values;
+import com.freemoz.app.dao.ContentDAO;
 import com.freemoz.app.dao.UserDAO;
 import com.freemoz.app.util.Helpers;
 import com.freemoz.app.util.Properties;
@@ -12,6 +13,7 @@ public class Singleton {
     private static IDatabaseConfig userDatabaseConfig = null;
     private static IDatabaseConfig contentDatabaseConfig = null;
     private static UserDAO userDAO = null;
+    private static ContentDAO contentDAO = null;
     private static Helpers helpers = null;
 
     public synchronized static IDatabaseConfig getUserDatabaseConfig() {
@@ -38,6 +40,14 @@ public class Singleton {
         }
 
         return userDAO;
+    }
+
+    public synchronized static ContentDAO getContentDAO() {
+        if (contentDAO == null) {
+            contentDAO = new ContentDAO();
+        }
+
+        return contentDAO;
     }
 
     public synchronized static Helpers getHelpers() {
