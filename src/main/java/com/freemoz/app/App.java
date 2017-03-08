@@ -36,7 +36,6 @@ public class App {
 
         get("/arts/*", (request, response) -> ContentRoute.getCategory(request, response, "arts"), new FreeMarkerEngine());
 
-
     }
 
     private static int getServerPort() {

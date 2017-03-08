@@ -16,6 +16,7 @@ public class ContentRoute {
         List<String> subcategories = Singleton.getContentDAO().getSubcategories();
         Map<String, Object> map = new HashMap<>();
 
+        map.put("categoryName", category);
         map.put("subCategories", subcategories);
 
         return new ModelAndView(map, "category.ftl");

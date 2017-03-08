@@ -33,8 +33,9 @@ public class ContentDAO {
 
         try {
             connection = this.dbConfig.getConnection();
-            preparedStatement = connection.prepareStatement("select topic from \"structure\" where parentid = ?;");
+            preparedStatement = connection.prepareStatement("select topic from \"structure\" where parentid = ? ORDER by topic;");
             preparedStatement.setInt(1, 1);
+            //preparedStatement.setInt(1, 12);
 
             resultSet = preparedStatement.executeQuery();
 
@@ -42,8 +43,7 @@ public class ContentDAO {
                 categories.add(resultSet.getString("topic"));
             }
         }
-        catch(SQLException ex) {
-
+        catch (SQLException ex) {
         }
         finally {
             this.helpers.closeQuietly(resultSet);

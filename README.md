@@ -9,14 +9,15 @@ DONE
 - Download existing dmoz data
 - Download slashtag data https://github.com/blekko/slashtag-data.git
 - Write down editorial guidelines / code of conduct / values probably based on http://contributor-covenant.org/version/1/4/
+- Create basic application
+- Establish goals
+- Investigate https://github.com/kremso/dmoz-parser for parsing existing dmoz data
+- Build data converters
 
 TODO
 - Add letsencrypt https cert
-- Create basic application
 - Setup website
-- Establish goals
 - Investigate pulling infromation from https://github.com/sindresorhus/awesome
-- Investigate https://github.com/kremso/dmoz-parser for parsing existing dmoz data
 
 GOALS
 - A new version of DMOZ
