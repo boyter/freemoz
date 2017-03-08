@@ -5,9 +5,14 @@
 
 <ol class="breadcrumb">
   <li><a href="/">Home</a></li>
-  <li><a href="#">Library</a></li>
+  <li><a href="/${categoryName}/">${categoryName}</a></li>
   <li class="active">Data</li>
 </ol>
+
+
+<div class="page-header">
+  <h2>Subcategories <small>(${subCategories?size})</small></h2>
+</div>
 
 <#list subCategories>
     <#items as result>
