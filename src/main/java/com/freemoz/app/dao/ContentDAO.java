@@ -2,6 +2,7 @@ package com.freemoz.app.dao;
 
 import com.freemoz.app.config.IDatabaseConfig;
 import com.freemoz.app.dto.ContentDTO;
+import com.freemoz.app.dto.StructureDTO;
 import com.freemoz.app.service.Singleton;
 import com.freemoz.app.util.Helpers;
 
@@ -25,8 +26,8 @@ public class ContentDAO {
         this.helpers = helpers;
     }
 
-    public List<String> getSubcategories(String category) {
-        List<String> categories = new ArrayList<>();
+    public List<StructureDTO> getSubcategories(String category) {
+        List<StructureDTO> categories = new ArrayList<>();
 
         Connection connection;
         PreparedStatement preparedStatement = null;
@@ -34,13 +35,17 @@ public class ContentDAO {
 
         try {
             connection = this.dbConfig.getConnection();
-            preparedStatement = connection.prepareStatement("select * from structure where parentid = (select id from structure where topic = ? limit 1) order by topic;");
+            preparedStatement = connection.prepareStatement("select id,parentid,topic from structure where parentid = (select id from structure where topic = ? limit 1) order by topic;");
             preparedStatement.setString(1, category);
 
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                categories.add(resultSet.getString("topic"));
+                categories.add(new StructureDTO(
+                    resultSet.getInt("id"),
+                    resultSet.getInt("parentid"),
+                    resultSet.getString("topic")
+                ));
             }
         }
         catch (SQLException ex) {

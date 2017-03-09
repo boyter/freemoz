@@ -21,7 +21,7 @@
 
     <div class="row">
     <#items as result>
-    <div class="col-md-3"><span class="glyphicon glyphicon glyphicon-folder-open" aria-hidden="true"></span> <a href="/${result}">${result}</a></div>
+    <div class="col-md-3"><span class="glyphicon glyphicon glyphicon-folder-open" aria-hidden="true"></span> <a href="/${result.topic}">${result.name}</a></div>
     </#items>
     </div>
 </#list>

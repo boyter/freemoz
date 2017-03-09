@@ -1,6 +1,9 @@
 package com.freemoz.app.dto;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 public class ContentDTO {
     private int id;
     private int parentid;
@@ -36,7 +39,7 @@ public class ContentDTO {
     }
 
     public String getTopic() {
-        return topic;
+        return this.topic;
     }
 
     public void setTopic(String topic) {

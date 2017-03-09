@@ -2,6 +2,7 @@ package com.freemoz.app.routes;
 
 
 import com.freemoz.app.dto.ContentDTO;
+import com.freemoz.app.dto.StructureDTO;
 import com.freemoz.app.service.Singleton;
 import spark.ModelAndView;
 import spark.Request;
@@ -19,7 +20,7 @@ public class ContentRoute {
             searchCategory = category + "/" + String.join("/", splat);
         }
 
-        List<String> subcategories = Singleton.getContentDAO().getSubcategories(searchCategory);
+        List<StructureDTO> subcategories = Singleton.getContentDAO().getSubcategories(searchCategory);
         List<ContentDTO> sites = Singleton.getContentDAO().getSites(searchCategory);
 
 
