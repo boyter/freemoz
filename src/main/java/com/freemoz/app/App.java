@@ -1,6 +1,7 @@
 package com.freemoz.app;
 
 import com.freemoz.app.config.Values;
+import com.freemoz.app.dto.ContentDTO;
 import com.freemoz.app.routes.ContentRoute;
 import com.freemoz.app.routes.EditorRoute;
 import com.freemoz.app.service.Singleton;
@@ -9,6 +10,8 @@ import com.freemoz.app.util.Properties;
 import spark.ModelAndView;
 import spark.Spark;
 import spark.template.freemarker.FreeMarkerEngine;
+
+import java.util.List;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
@@ -48,6 +51,19 @@ public class App {
         get("/Shopping/*", (request, response) -> ContentRoute.getCategory(request, response, "Shopping"), new FreeMarkerEngine());
         get("/Society/*", (request, response) -> ContentRoute.getCategory(request, response, "Society"), new FreeMarkerEngine());
         get("/Sports/*", (request, response) -> ContentRoute.getCategory(request, response, "Sports"), new FreeMarkerEngine());
+
+        get("/reindex/", (request, response) -> {
+            List<ContentDTO> allSitesPaged = Singleton.getContentDAO().getAllSitesPaged(0, 10000);
+            Singleton.getIndexer().indexDocuments(allSitesPaged);
+
+            return null;
+        }, new FreeMarkerEngine());
+
+        get("/search/", (request, response) -> {
+
+            Singleton.getSearcher().search("test", 0);
+            return null;
+        }, new FreeMarkerEngine());
 
     }
 

@@ -15,6 +15,8 @@ public class Singleton {
     private static UserDAO userDAO = null;
     private static ContentDAO contentDAO = null;
     private static Helpers helpers = null;
+    private static Indexer indexer = null;
+    private static Searcher searcher = null;
 
     public synchronized static IDatabaseConfig getUserDatabaseConfig() {
         if (userDatabaseConfig == null) {
@@ -56,5 +58,21 @@ public class Singleton {
         }
 
         return helpers;
+    }
+
+    public synchronized static Indexer getIndexer() {
+        if (indexer == null) {
+            indexer = new Indexer();
+        }
+
+        return indexer;
+    }
+
+    public synchronized static Searcher getSearcher() {
+        if (searcher == null) {
+            searcher = new Searcher();
+        }
+
+        return searcher;
     }
 }

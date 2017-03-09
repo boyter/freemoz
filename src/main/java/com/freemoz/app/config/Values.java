@@ -17,5 +17,14 @@ public class Values {
     public static final String DEFAULT_SERVER_TYPE = "authoring";
 
 
+    public static final String INDEX_LOCATION = "index_location";
+    public static final String DEFAULT_INDEX_LOCATION = "./index/";
+
     public static final String EMPTY_STRING = "";
+
+
+    // Used for indexing
+    public static final String PATH = "path";
+    public static final String TITLE = "title";
+    public static final String DESCRIPTION = "description";
 }

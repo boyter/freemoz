@@ -92,4 +92,40 @@ public class ContentDAO {
 
         return sites;
     }
+
+    public List<ContentDTO> getAllSitesPaged(int offset, int pagesize) {
+        List<ContentDTO> sites = new ArrayList<>();
+
+        Connection connection;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = this.dbConfig.getConnection();
+            preparedStatement = connection.prepareStatement("select id,parentid,topic,title,description,url from content order by id limit ?, ?;");
+            preparedStatement.setInt(1, offset);
+            preparedStatement.setInt(2, pagesize);
+
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                sites.add(new ContentDTO(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("parentid"),
+                        resultSet.getString("topic"),
+                        resultSet.getString("title"),
+                        resultSet.getString("description"),
+                        resultSet.getString("url")
+                ));
+            }
+        }
+        catch (SQLException ex) {
+        }
+        finally {
+            this.helpers.closeQuietly(resultSet);
+            this.helpers.closeQuietly(preparedStatement);
+        }
+
+        return sites;
+    }
 }
