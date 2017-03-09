@@ -6,18 +6,39 @@
 <ol class="breadcrumb">
   <li><a href="/">Home</a></li>
   <li><a href="/${categoryName}/">${categoryName}</a></li>
-  <li class="active">Data</li>
+
+  <#list breadCrumb>
+    <#items as result>
+      <li><a href="/${result}/">${result}</a></li>
+    </#items>
+  </#list>
 </ol>
 
-
-<div class="page-header">
-  <h2>Subcategories <small>(${subCategories?size})</small></h2>
-</div>
-
 <#list subCategories>
+    <div class="page-header">
+      <h2>Subcategories <small>(${subCategories?size})</small></h2>
+    </div>
+
+    <div class="row">
     <#items as result>
-    <a href="/${result}">${result}</a><br />
+    <div class="col-md-3"><span class="glyphicon glyphicon glyphicon-folder-open" aria-hidden="true"></span> <a href="/${result}">${result}</a></div>
     </#items>
+    </div>
 </#list>
+
+
+<#list sites>
+    <div class="page-header">
+      <h2>Sites <small>(${sites?size})</small></h2>
+    </div>
+
+    <dl>
+    <#items as result>
+        <dt><a href="${result.url}">${result.title}</a></dt>
+        <dd>${result.description}</dd>
+    </#items>
+    </dl>
+</#list>
+
 
 </@layout.masterTemplate>

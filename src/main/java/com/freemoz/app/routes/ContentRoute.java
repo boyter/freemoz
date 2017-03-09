@@ -1,16 +1,13 @@
 package com.freemoz.app.routes;
 
 
-import com.freemoz.app.config.Values;
+import com.freemoz.app.dto.ContentDTO;
 import com.freemoz.app.service.Singleton;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ContentRoute {
     public static ModelAndView getCategory(Request request, Response response, String category) {
@@ -23,9 +20,18 @@ public class ContentRoute {
         }
 
         List<String> subcategories = Singleton.getContentDAO().getSubcategories(searchCategory);
-        
+        List<ContentDTO> sites = Singleton.getContentDAO().getSites(searchCategory);
+
+
+        String[] breadCrumb = new String[0];
+        if (!splat.isEmpty()) {
+            breadCrumb = splat.get(0).split("/");
+        }
+
+        map.put("breadCrumb", breadCrumb);
         map.put("categoryName", category);
         map.put("subCategories", subcategories);
+        map.put("sites", sites);
 
         return new ModelAndView(map, "category.ftl");
     }
