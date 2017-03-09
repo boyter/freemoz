@@ -145,12 +145,12 @@ def expand_topics(topics):
     return newtopics
 
 
-def update_content_parents(toupdate):
+def update_content_parents(parentid, toupdate):
     db = sqlite3.connect('freemoz-content.sqlite')
     cursor = db.cursor()
 
     for x in toupdate:
-        cursor.execute('''UPDATE content SET parentid = ? WHERE id = ?''', (x[1], x[0]))
+        cursor.execute('''UPDATE content SET parentid = ? WHERE id = ?''', (parentid, x[0]))
     db.commit()
 
 
@@ -162,31 +162,35 @@ def update_content_topics():
 
     topics = []
     print 'Fetching all topics...'
-    for row in cursor.execute('''SELECT id, parentid, topic FROM structure'''):
+    for row in cursor.execute('''SELECT id, parentid, topic FROM structure LIMIT 1000'''):
         topics.append(row)
 
     content = []
     print 'Fetching all content...'
-    for row in cursor.execute('''SELECT id, topic FROM content'''):
+    for row in cursor.execute('''SELECT id, topic FROM content LIMIT 1000'''):
         content.append(row)
 
-    toupdate = []
-    for row in content:
-        parent = None
-        for x in topics:
-            if x[2] == row[1]:
-                parent = x
-                break
+    for i, topic in enumerate(topics):
+        toupdate = [x for x in content if x[1] == topic[2]]
 
-        if parent:
-            toupdate.append([row[0], parent[0]])
+        if i % 1000 == 0:
+            print 'Update', topic[2], 'children', len(toupdate)
 
-        if len(toupdate) == 10000:
-            print 'Updating Parents...', row[0]
-            update_content_parents(toupdate)
-            toupdate = []
+        update_content_parents(topic[0], toupdate)
 
-    update_content_parents(toupdate)
+
+def create_indexes():
+    print 'Creating indexes...'
+
+    db = sqlite3.connect('freemoz-content.sqlite')
+    cursor = db.cursor()
+
+    cursor.execute('''CREATE INDEX structure_parentid_idx ON structure (parentid);''')
+    db.commit()
+    cursor.execute('''CREATE INDEX structure_topic_idx ON structure (topic);''')
+    db.commit()
+    cursor.execute('''CREATE INDEX content_parentid_idx ON content (parentid);''')
+    db.commit()
 
 
 create_table()
@@ -196,3 +200,4 @@ insert_topics(topics=topics)
 build_relations()
 build_relations(False)
 update_content_topics()
+create_indexes()
