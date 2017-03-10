@@ -4,6 +4,7 @@ import com.freemoz.app.config.Values;
 import com.freemoz.app.dto.ContentDTO;
 import com.freemoz.app.routes.ContentRoute;
 import com.freemoz.app.routes.EditorRoute;
+import com.freemoz.app.routes.SearchRoute;
 import com.freemoz.app.service.Singleton;
 import com.freemoz.app.util.Helpers;
 import com.freemoz.app.util.Properties;
@@ -32,9 +33,10 @@ public class App {
         }, new FreeMarkerEngine());
 
 
-        get( "/login/", (EditorRoute::login), new FreeMarkerEngine());
-        post( "/login/", (EditorRoute::doLogin), new FreeMarkerEngine());
-        get( "/logout/", (EditorRoute::logout), new FreeMarkerEngine());
+        get("/login/", (EditorRoute::login), new FreeMarkerEngine());
+        post("/login/", (EditorRoute::doLogin), new FreeMarkerEngine());
+        get("/logout/", (EditorRoute::logout), new FreeMarkerEngine());
+        get("/search/", (SearchRoute::search), new FreeMarkerEngine());
 
         // Special routes to preserve the root categories
         get("/Arts/*", (request, response) -> ContentRoute.getCategory(request, response, "Arts"), new FreeMarkerEngine());
@@ -53,15 +55,9 @@ public class App {
         get("/Sports/*", (request, response) -> ContentRoute.getCategory(request, response, "Sports"), new FreeMarkerEngine());
 
         get("/reindex/", (request, response) -> {
-            List<ContentDTO> allSitesPaged = Singleton.getContentDAO().getAllSitesPaged(0, 10000);
+            List<ContentDTO> allSitesPaged = Singleton.getContentDAO().getAllSitesPaged(0, 100000);
             Singleton.getIndexer().indexDocuments(allSitesPaged);
 
-            return null;
-        }, new FreeMarkerEngine());
-
-        get("/search/", (request, response) -> {
-
-            Singleton.getSearcher().search("test", 0);
             return null;
         }, new FreeMarkerEngine());
 

@@ -22,20 +22,26 @@ import java.util.List;
 
 public class Indexer {
 
+    private Directory indexDirectory;
+
+    public Indexer() {
+        try {
+            this.indexDirectory = FSDirectory.open(Paths.get(Properties.getProperties().getProperty(Values.INDEX_LOCATION, Values.DEFAULT_INDEX_LOCATION)));
+        } catch (IOException e) {}
+    }
+
     /**
      * Given a queue of documents to index, index them by popping the queue limited to 1000 items.
      * This method must be synchronized as we have not added any logic to deal with multiple threads writing to the
      * index.
      */
     public synchronized void indexDocuments(List<ContentDTO> contentDTOList) throws IOException {
-        Directory indexDirectory = FSDirectory.open(Paths.get(Properties.getProperties().getProperty(Values.INDEX_LOCATION, Values.DEFAULT_INDEX_LOCATION)));
-
         Analyzer analyzer = new StandardAnalyzer();
         IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);
 
         indexWriterConfig.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
 
-        IndexWriter writer = new IndexWriter(indexDirectory, indexWriterConfig);
+        IndexWriter writer = new IndexWriter(this.indexDirectory, indexWriterConfig);
 
         try {
             for(ContentDTO contentDTO: contentDTOList) {

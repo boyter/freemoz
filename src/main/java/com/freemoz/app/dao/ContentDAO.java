@@ -128,4 +128,39 @@ public class ContentDAO {
 
         return sites;
     }
+
+    public ContentDTO getById(int id) {
+        ContentDTO contentDTO = null;
+
+        Connection connection;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = this.dbConfig.getConnection();
+            preparedStatement = connection.prepareStatement("select id,parentid,topic,title,description,url from content where id = ?;");
+            preparedStatement.setInt(1, id);
+
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                contentDTO = new ContentDTO(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("parentid"),
+                        resultSet.getString("topic"),
+                        resultSet.getString("title"),
+                        resultSet.getString("description"),
+                        resultSet.getString("url")
+                );
+            }
+        }
+        catch (SQLException ex) {
+        }
+        finally {
+            this.helpers.closeQuietly(resultSet);
+            this.helpers.closeQuietly(preparedStatement);
+        }
+
+        return contentDTO;
+    }
 }

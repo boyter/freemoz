@@ -2,6 +2,10 @@ package com.freemoz.app.service;
 
 
 import com.freemoz.app.config.Values;
+import com.freemoz.app.dao.ContentDAO;
+import com.freemoz.app.dto.ContentDTO;
+import com.freemoz.app.dto.SearchResult;
+import com.freemoz.app.util.Helpers;
 import com.freemoz.app.util.Properties;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -22,28 +26,34 @@ import java.util.List;
 
 public class Searcher {
 
+    private final ContentDAO contentDAO;
     private int PAGELIMIT = 20;
 
-    public void search(String queryString, int page) {
+    public Searcher() {
+        this.contentDAO = Singleton.getContentDAO();
+    }
+
+    public SearchResult search(String queryString, int page) {
+        SearchResult searchResult = null;
+
         try {
             IndexReader reader = DirectoryReader.open(FSDirectory.open(Paths.get(Properties.getProperties().getProperty(Values.INDEX_LOCATION, Values.DEFAULT_INDEX_LOCATION))));
             IndexSearcher searcher = new IndexSearcher(reader);
-
             Analyzer analyzer = new StandardAnalyzer();
 
             // Search over the titles only for the moment
             QueryParser parser = new QueryParser(Values.TITLE, analyzer);
-
             Query query = parser.parse(queryString);
 
-            this.doPagingSearch(reader, searcher, query, page);
+            searchResult = this.doPagingSearch(reader, searcher, query, queryString, page);
             reader.close();
         }
         catch(Exception ex) {}
-        //return searchResult;
+
+        return searchResult;
     }
 
-    public void doPagingSearch(IndexReader reader, IndexSearcher searcher, Query query, int page) throws IOException {
+    public SearchResult doPagingSearch(IndexReader reader, IndexSearcher searcher, Query query, String queryString, int page) throws IOException {
         TopDocs results = searcher.search(query, 20 * this.PAGELIMIT); // 20 pages worth of documents
         ScoreDoc[] hits = results.scoreDocs;
 
@@ -57,16 +67,20 @@ public class Searcher {
         }
 
         List<Integer> pages = this.calculatePages(numTotalHits, noPages);
-
+        List<ContentDTO> contentDTOList = new ArrayList<>();
 
         for (int i = start; i < end; i++) {
             Document doc = searcher.doc(hits[i].doc);
             String filepath = doc.get(Values.PATH);
 
             // Get the content out of database
+            ContentDTO byId = this.contentDAO.getById(Helpers.tryParseInt(filepath, -1));
+            if (byId != null) {
+                contentDTOList.add(byId);
+            }
         }
 
-        //return new SearchResult(numTotalHits, page, query.toString(), codeResults, pages, codeFacetLanguages, repoFacetLanguages, repoFacetOwner);
+        return new SearchResult(numTotalHits, page, queryString, contentDTOList);
     }
 
     public List<Integer> calculatePages(int numTotalHits, int noPages) {
