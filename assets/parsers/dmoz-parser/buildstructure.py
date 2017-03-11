@@ -149,8 +149,7 @@ def update_content_parents(parentid, toupdate):
     db = sqlite3.connect('freemoz-content.sqlite')
     cursor = db.cursor()
 
-    for x in toupdate:
-        cursor.execute('''UPDATE content SET parentid = ? WHERE id = ?''', (parentid, x[0]))
+    cursor.execute('''UPDATE content SET parentid = ? WHERE id = ?''', (parentid, toupdate))
     db.commit()
 
 
@@ -160,23 +159,31 @@ def update_content_topics():
     db = sqlite3.connect('freemoz-content.sqlite')
     cursor = db.cursor()
 
-    topics = []
+    topics_dict = {}
     print 'Fetching all topics...'
-    for row in cursor.execute('''SELECT id, parentid, topic FROM structure LIMIT 1000'''):
-        topics.append(row)
+    for row in cursor.execute('''SELECT id, parentid, topic FROM structure'''):
+        topics_dict[row[2]] = row[0]
 
     content = []
     print 'Fetching all content...'
-    for row in cursor.execute('''SELECT id, topic FROM content LIMIT 1000'''):
+    for row in cursor.execute('''SELECT id, topic FROM content'''):
         content.append(row)
 
-    for i, topic in enumerate(topics):
-        toupdate = [x for x in content if x[1] == topic[2]]
+    for i, con in enumerate(content):
+
+        if con[1] in topics_dict:
+            update_content_parents(topics_dict[con[1]], con[0])
 
         if i % 1000 == 0:
-            print 'Update', topic[2], 'children', len(toupdate)
+            print 'Update', con
 
-        update_content_parents(topic[0], toupdate)
+            # for i, topic in enumerate(topics):
+            #     toupdate = [x for x in content if x[1] == topic[2]]
+
+            #     if i % 1000 == 0:
+            #         print 'Update', topic[2], 'children', len(toupdate)
+
+            #     update_content_parents(topic[0], toupdate)
 
 
 def create_indexes():
