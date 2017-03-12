@@ -80,7 +80,7 @@ public class Searcher {
             }
         }
 
-        return new SearchResult(numTotalHits, page, queryString, contentDTOList);
+        return new SearchResult(numTotalHits, page, pages, queryString, contentDTOList);
     }
 
     public List<Integer> calculatePages(int numTotalHits, int noPages) {

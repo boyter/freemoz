@@ -27,4 +27,13 @@
     </dl>
 </#list>
 
+<div class="search-pagination">
+    <ul class="pagination"><#list searchResult.pages>
+      <#items as page>
+        <li <#if page == searchResult.page>class="active"</#if>> <a href="?q=${searchResult.query?html}&p=${page}">${page + 1}</a></li>
+        </#items>
+      </#list>
+    </ul>
+</div>
+
 </@layout.masterTemplate>
