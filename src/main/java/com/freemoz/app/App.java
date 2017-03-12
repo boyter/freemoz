@@ -38,6 +38,8 @@ public class App {
         get("/logout/", (EditorRoute::logout), new FreeMarkerEngine());
         get("/search/", (SearchRoute::search), new FreeMarkerEngine());
 
+        get("/about/", (request, response) -> new ModelAndView(null, "about.ftl"), new FreeMarkerEngine());
+
         // Special routes to preserve the root categories
         get("/Arts/*", (request, response) -> ContentRoute.getCategory(request, response, "Arts"), new FreeMarkerEngine());
         get("/Business/*", (request, response) -> ContentRoute.getCategory(request, response, "Business"), new FreeMarkerEngine());
@@ -53,14 +55,6 @@ public class App {
         get("/Shopping/*", (request, response) -> ContentRoute.getCategory(request, response, "Shopping"), new FreeMarkerEngine());
         get("/Society/*", (request, response) -> ContentRoute.getCategory(request, response, "Society"), new FreeMarkerEngine());
         get("/Sports/*", (request, response) -> ContentRoute.getCategory(request, response, "Sports"), new FreeMarkerEngine());
-
-        get("/reindex/", (request, response) -> {
-            List<ContentDTO> allSitesPaged = Singleton.getContentDAO().getAllSitesPaged(0, 100000);
-            Singleton.getIndexer().indexDocuments(allSitesPaged);
-
-            return null;
-        }, new FreeMarkerEngine());
-
     }
 
     private static int getServerPort() {
@@ -70,5 +64,8 @@ public class App {
     private static void preStart() {
         // Setup database
         Singleton.getUserDAO().createTableIfMissing();
+
+        // Start jobs
+        Singleton.getJobService().startJobs();
     }
 }

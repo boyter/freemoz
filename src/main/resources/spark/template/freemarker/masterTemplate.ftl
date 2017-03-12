@@ -49,8 +49,8 @@
       <#nested />
 
 
-      <div>
-      About Freemoz
+      <div style="border-top: 1px solid #eee; padding-top:5px; margin-top:10px;">
+      <a href="https://github.com/boyter/freemoz">Free Software under GNU GPL 3.0 License</a>
       </div>
     </div> <!-- /container -->
   </body>

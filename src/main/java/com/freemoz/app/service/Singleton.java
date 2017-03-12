@@ -8,6 +8,10 @@ import com.freemoz.app.dao.ContentDAO;
 import com.freemoz.app.dao.UserDAO;
 import com.freemoz.app.util.Helpers;
 import com.freemoz.app.util.Properties;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.SchedulerFactory;
+import org.quartz.impl.StdSchedulerFactory;
 
 public class Singleton {
     private static IDatabaseConfig userDatabaseConfig = null;
@@ -17,6 +21,20 @@ public class Singleton {
     private static Helpers helpers = null;
     private static Indexer indexer = null;
     private static Searcher searcher = null;
+    private static JobService jobService = null;
+    private static Scheduler scheduler;
+
+    public static synchronized Scheduler getScheduler() {
+
+        if (scheduler == null) {
+            try {
+                SchedulerFactory sf = new StdSchedulerFactory();
+                scheduler = sf.getScheduler();
+            } catch (SchedulerException ex) {}
+        }
+
+        return scheduler;
+    }
 
     public synchronized static IDatabaseConfig getUserDatabaseConfig() {
         if (userDatabaseConfig == null) {
@@ -34,6 +52,14 @@ public class Singleton {
         }
 
         return contentDatabaseConfig;
+    }
+
+    public synchronized static JobService getJobService() {
+        if (jobService == null) {
+            jobService = new JobService();
+        }
+
+        return jobService;
     }
 
     public synchronized static UserDAO getUserDAO() {

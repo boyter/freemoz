@@ -10,6 +10,11 @@
 
 <h2>Results for: ${searchResult.query}</h2>
 
+
+<#if searchResult.results?size == 0>
+<p>No results found. Try with another search.</p>
+</#if>
+
 <#list searchResult.results>
     <dl>
     <#items as result>
