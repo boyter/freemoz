@@ -35,6 +35,7 @@ public class App {
 
         get("/about/", (request, response) -> new ModelAndView(null, "about.ftl"), new FreeMarkerEngine());
         get("/become/", (request, response) -> new ModelAndView(null, "become.ftl"), new FreeMarkerEngine());
+        get("/suggest/", (request, response) -> new ModelAndView(null, "suggest.ftl"), new FreeMarkerEngine());
 
         // Special routes to preserve the root categories
         get("/Arts/*", (request, response) -> ContentRoute.getCategory(request, response, "Arts"), new FreeMarkerEngine());
