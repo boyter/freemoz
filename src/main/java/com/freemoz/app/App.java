@@ -25,9 +25,7 @@ public class App {
         Spark.port(getServerPort());
         Spark.staticFileLocation("/public");
 
-        get("/", (request, response) -> {
-            return new ModelAndView(null, "index.ftl");
-        }, new FreeMarkerEngine());
+        get("/", (request, response) -> new ModelAndView(null, "index.ftl"), new FreeMarkerEngine());
 
 
         get("/login/", (EditorRoute::login), new FreeMarkerEngine());
@@ -36,6 +34,7 @@ public class App {
         get("/search/", (SearchRoute::search), new FreeMarkerEngine());
 
         get("/about/", (request, response) -> new ModelAndView(null, "about.ftl"), new FreeMarkerEngine());
+        get("/become/", (request, response) -> new ModelAndView(null, "become.ftl"), new FreeMarkerEngine());
 
         // Special routes to preserve the root categories
         get("/Arts/*", (request, response) -> ContentRoute.getCategory(request, response, "Arts"), new FreeMarkerEngine());
