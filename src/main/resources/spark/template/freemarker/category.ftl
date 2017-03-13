@@ -1,15 +1,14 @@
 <#import "masterTemplate.ftl" as layout />
 <@layout.masterTemplate title="Freemoz.org a spiritual sucessor to dmoz.org">
 
-<h1>${categoryName}</h1>
+<h1><img src="/img/icons/recreation.svg" alt="Recreation" height="50px" width="50px" /> ${categoryName}</h1>
 
 <ol class="breadcrumb">
   <li><a href="/">Home</a></li>
-  <li><a href="/${categoryName}/">${categoryName}</a></li>
 
   <#list breadCrumb>
     <#items as result>
-      <li><a href="/${result}/">${result}</a></li>
+      <li><a href="${result.path}/">${result.name}</a></li>
     </#items>
   </#list>
 </ol>

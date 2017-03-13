@@ -1,6 +1,7 @@
 package com.freemoz.app.routes;
 
 
+import com.freemoz.app.dto.BreadCrumbDTO;
 import com.freemoz.app.dto.ContentDTO;
 import com.freemoz.app.dto.StructureDTO;
 import com.freemoz.app.service.Singleton;
@@ -23,11 +24,17 @@ public class ContentRoute {
         List<StructureDTO> subcategories = Singleton.getContentDAO().getSubcategories(searchCategory);
         List<ContentDTO> sites = Singleton.getContentDAO().getSites(searchCategory);
 
-
-        String[] breadCrumb = new String[0];
+        List<BreadCrumbDTO> breadCrumb = new ArrayList<>();
         if (!splat.isEmpty()) {
-            breadCrumb = splat.get(0).split("/");
+            String newSplat = "/" + category + "/" + splat.get(0);
+            List<String> split = Arrays.asList(newSplat.split("/"));
+
+            for (int i=split.size() -1; i != 0; i--) {
+                breadCrumb.add(new BreadCrumbDTO(String.join("/", split.subList(0, i + 1)), split.get(i)));
+            }
+            Collections.reverse(breadCrumb);
         }
+
 
         map.put("breadCrumb", breadCrumb);
         map.put("categoryName", category);

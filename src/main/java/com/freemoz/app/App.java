@@ -1,7 +1,6 @@
 package com.freemoz.app;
 
 import com.freemoz.app.config.Values;
-import com.freemoz.app.dto.ContentDTO;
 import com.freemoz.app.routes.ContentRoute;
 import com.freemoz.app.routes.EditorRoute;
 import com.freemoz.app.routes.SearchRoute;
@@ -11,8 +10,6 @@ import com.freemoz.app.util.Properties;
 import spark.ModelAndView;
 import spark.Spark;
 import spark.template.freemarker.FreeMarkerEngine;
-
-import java.util.List;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
@@ -66,6 +63,6 @@ public class App {
         Singleton.getUserDAO().createTableIfMissing();
 
         // Start jobs
-        Singleton.getJobService().startJobs();
+        // Singleton.getJobService().startJobs();
     }
 }
