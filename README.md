@@ -15,7 +15,7 @@ DONE
 - Build data converters
 
 TODO
-- Add letsencrypt https cert
+- Add letsencrypt https cert https://certbot.eff.org/#ubuntuxenial-nginx
 - Setup website
 - Investigate pulling infromation from https://github.com/sindresorhus/awesome
 
