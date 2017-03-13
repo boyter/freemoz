@@ -1,6 +1,9 @@
 <#import "masterTemplate.ftl" as layout />
 <@layout.masterTemplate title="Admin">
 
+    <h2>Login</h2>
+    <p>If you are an editor you can login below using your supplied username and password.</p>
+
     <form action="/login/" method="post" class="form-inline">
       <div class="form-group">
         <label class="sr-only" for="loginUsername">Username</label>
