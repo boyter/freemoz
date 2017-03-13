@@ -62,6 +62,6 @@ public class App {
         Singleton.getUserDAO().createTableIfMissing();
 
         // Start jobs
-        // Singleton.getJobService().startJobs();
+        Singleton.getJobService().startJobs();
     }
 }

@@ -20,7 +20,7 @@
 
     <div class="row">
     <#items as result>
-    <div class="col-md-3"><span class="glyphicon glyphicon glyphicon-folder-open" aria-hidden="true"></span> <a href="/${result.topic}">${result.name?replace("_", " ")}</a></div>
+    <div class="col-md-3"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> <a href="/${result.topic}">${result.name?replace("_", " ")}</a></div>
     </#items>
     </div>
 </#list>
@@ -33,7 +33,7 @@
 
     <dl>
     <#items as result>
-        <dt><a href="${result.url}">${result.title}</a></dt>
+        <dt><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> <a href="${result.url}">${result.title}</a></dt>
         <dd>${result.description}</dd>
     </#items>
     </dl>
