@@ -36,8 +36,8 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="/about/">About</a></li>
-              <li><a href="#">Become an Editor</a></li>
-              <li><a href="#">Suggest a Site</a></li>
+              <li><a href="/become/">Become an Editor</a></li>
+              <li><a href="/suggest/">Suggest a Site</a></li>
               <li><a href="/login/">Login</a></li>
             </ul>
           </div><!--/.nav-collapse -->
@@ -50,7 +50,31 @@
 
 
       <div style="border-top: 1px solid #eee; padding-top:5px; margin-top:10px;">
-      <a href="https://github.com/boyter/freemoz">Free Software under GNU GPL 3.0 License</a>
+      <a href="https://github.com/boyter/freemoz">Free Software under GNU GPL 3.0 License</a> |
+      <a href="https://www.elegantthemes.com/blog/freebie-of-the-week/beautiful-flat-icons-for-free">Icons under GNU GPL 2.0 License</a> |
+      <a href="https://creativecommons.org/licenses/by/3.0/">Content under Creative Commons Attribution 3.0 Unported License</a>
+      </div>
+      <div style="margin-top:10px;">
+          <!-- Requirement as per terms of DMOZ licence http://rdf.dmoz.org/ -->
+          <center>
+          <table style="background-color: #336600;" border="0" bgcolor="#336600" cellpadding="3" cellspacing="0">
+          <tr><td>
+          <table width="100%" cellpadding="2" cellspacing="0" border="0">
+          <tr align="center"><td>
+          <font face="sans-serif, Arial, Helvetica" size="2" color="#ffffff">
+          Be part of the largest human-edited directory on the web.
+          </font>
+          </td></tr>
+          <tr bgcolor="#f9f9f9" align="center">
+          <td><font face="sans-serif, Arial, Helvetica" size="2">
+          <a href="http://www.dmoz.org/docs/en/add.html">Suggest a Site</a> -
+          <a href="http://www.dmoz.org/about.html"><b>DMOZ</b></a> -
+          <a href="http://www.dmoz.org/docs/en/help/become.html">Become an Editor</a>
+          </font></td></tr>
+          </table>
+          </td></tr>
+          </table>
+          </center>
       </div>
     </div> <!-- /container -->
   </body>
