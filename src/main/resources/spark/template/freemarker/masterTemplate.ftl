@@ -35,7 +35,7 @@
           </form>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">About</a></li>
+              <li><a href="/about/">About</a></li>
               <li><a href="#">Become an Editor</a></li>
               <li><a href="#">Suggest a Site</a></li>
               <li><a href="/login/">Login</a></li>

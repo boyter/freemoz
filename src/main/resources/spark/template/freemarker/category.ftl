@@ -1,7 +1,7 @@
 <#import "masterTemplate.ftl" as layout />
 <@layout.masterTemplate title="Freemoz.org a spiritual sucessor to dmoz.org">
 
-<h1><img src="/img/icons/recreation.svg" alt="Recreation" height="50px" width="50px" /> ${categoryName}</h1>
+<h1><img src="/img/icons/${categoryName?lower_case}.png" alt="Recreation" height="50px" width="50px" /> ${categoryName}</h1>
 
 <ol class="breadcrumb">
   <li><a href="/">Home</a></li>
