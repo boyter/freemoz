@@ -41,6 +41,12 @@
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.16.1</version>
         </dependency>
+        <!-- Persistant file queue -->
+        <dependency>
+            <groupId>com.squareup</groupId>
+            <artifactId>tape</artifactId>
+            <version>1.2.3</version>
+        </dependency>
         <!-- IO Helpers -->
         <dependency>
             <groupId>commons-io</groupId>

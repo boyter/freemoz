@@ -27,7 +27,6 @@ public class App {
 
         get("/", (request, response) -> new ModelAndView(null, "index.ftl"), new FreeMarkerEngine());
 
-
         get("/login/", (EditorRoute::login), new FreeMarkerEngine());
         post("/login/", (EditorRoute::doLogin), new FreeMarkerEngine());
         get("/logout/", (EditorRoute::logout), new FreeMarkerEngine());
@@ -52,6 +51,7 @@ public class App {
         get("/Shopping/*", (request, response) -> ContentRoute.getCategory(request, response, "Shopping"), new FreeMarkerEngine());
         get("/Society/*", (request, response) -> ContentRoute.getCategory(request, response, "Society"), new FreeMarkerEngine());
         get("/Sports/*", (request, response) -> ContentRoute.getCategory(request, response, "Sports"), new FreeMarkerEngine());
+
     }
 
     private static int getServerPort() {
@@ -63,6 +63,6 @@ public class App {
         Singleton.getUserDAO().createTableIfMissing();
 
         // Start jobs
-        Singleton.getJobService().startJobs();
+        //Singleton.getJobService().startJobs();
     }
 }

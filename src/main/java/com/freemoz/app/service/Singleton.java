@@ -22,6 +22,7 @@ public class Singleton {
     private static Indexer indexer = null;
     private static Searcher searcher = null;
     private static JobService jobService = null;
+    private static EditorService editorService = null;
     private static Scheduler scheduler;
 
     public static synchronized Scheduler getScheduler() {
@@ -60,6 +61,14 @@ public class Singleton {
         }
 
         return jobService;
+    }
+
+    public synchronized static EditorService getEditorService() {
+        if (editorService == null) {
+            editorService = new EditorService();
+        }
+
+        return editorService;
     }
 
     public synchronized static UserDAO getUserDAO() {

@@ -3,6 +3,7 @@ package com.freemoz.app.routes;
 
 import com.freemoz.app.dto.UserDTO;
 import com.freemoz.app.service.EditorService;
+import com.freemoz.app.service.Singleton;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -30,20 +31,13 @@ public class EditorRoute {
             return null;
         }
 
-        Map<String, Object> sparkModel = new HashMap<>();
-
         if (!request.queryParams().contains("loginUsername") || !request.queryParams().contains("loginPassword")) {
             response.redirect("/login/");
             halt();
             return null;
         }
 
-        String username = request.queryParams("loginUsername");
-        String password = request.queryParams("loginPassword");
-
-        EditorService editorService = new EditorService();
-
-        UserDTO user = editorService.loginUser(username, password);
+        UserDTO user = Singleton.getEditorService().loginUser(request.queryParams("loginUsername"), request.queryParams("loginPassword"));
 
         if (user == null) {
             response.redirect("/login/");
@@ -51,7 +45,7 @@ public class EditorRoute {
             return null;
         }
 
-        addAuthenticatedUser(request);
+        addAuthenticatedUser(request, user);
 
         response.redirect("/");
         halt();
@@ -66,15 +60,15 @@ public class EditorRoute {
         return null;
     }
 
-    private static void addAuthenticatedUser(Request request) {
-        request.session().attribute("", true);
+    private static void addAuthenticatedUser(Request request, UserDTO user) {
+        request.session().attribute("user", user.getUsername());
     }
 
     private static void removeAuthenticatedUser(Request request) {
-        request.session().removeAttribute("");
+        request.session().removeAttribute("user");
     }
 
-    private static Object getAuthenticatedUser(Request request) {
-        return request.session().attribute("");
+    private static String getAuthenticatedUser(Request request) {
+        return request.session().attribute("user");
     }
 }
