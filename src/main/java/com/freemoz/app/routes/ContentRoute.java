@@ -43,4 +43,12 @@ public class ContentRoute {
 
         return new ModelAndView(map, "category.ftl");
     }
+
+    public static List<StructureDTO> getCategories(Request request, Response response) {
+        if (!request.queryParams().contains("q")) {
+            return new ArrayList<>();
+        }
+
+        return Singleton.getContentDAO().searchCategories(request.queryParams("q"));
+    }
 }

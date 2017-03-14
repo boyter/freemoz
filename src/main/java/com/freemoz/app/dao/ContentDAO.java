@@ -58,6 +58,38 @@ public class ContentDAO {
         return categories;
     }
 
+    public List<StructureDTO> searchCategories(String category) {
+        List<StructureDTO> categories = new ArrayList<>();
+
+        Connection connection;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = this.dbConfig.getConnection();
+            preparedStatement = connection.prepareStatement("SELECT id,parentid,topic FROM structure WHERE topic like ? || '%' LIMIT 20;");
+            preparedStatement.setString(1, category);
+
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                categories.add(new StructureDTO(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("parentid"),
+                        resultSet.getString("topic")
+                ));
+            }
+        }
+        catch (SQLException ex) {
+        }
+        finally {
+            this.helpers.closeQuietly(resultSet);
+            this.helpers.closeQuietly(preparedStatement);
+        }
+
+        return categories;
+    }
+
     public List<ContentDTO> getSites(String category) {
         List<ContentDTO> sites = new ArrayList<>();
 

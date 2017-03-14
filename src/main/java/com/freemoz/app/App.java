@@ -6,13 +6,13 @@ import com.freemoz.app.routes.EditorRoute;
 import com.freemoz.app.routes.SearchRoute;
 import com.freemoz.app.service.Singleton;
 import com.freemoz.app.util.Helpers;
+import com.freemoz.app.util.JsonTransformer;
 import com.freemoz.app.util.Properties;
 import spark.ModelAndView;
 import spark.Spark;
 import spark.template.freemarker.FreeMarkerEngine;
 
-import static spark.Spark.get;
-import static spark.Spark.post;
+import static spark.Spark.*;
 
 /**
  * Main entry point for the application.
@@ -51,6 +51,16 @@ public class App {
         get("/Shopping/*", (request, response) -> ContentRoute.getCategory(request, response, "Shopping"), new FreeMarkerEngine());
         get("/Society/*", (request, response) -> ContentRoute.getCategory(request, response, "Society"), new FreeMarkerEngine());
         get("/Sports/*", (request, response) -> ContentRoute.getCategory(request, response, "Sports"), new FreeMarkerEngine());
+
+
+        ////////////////////////////////////////////////////
+        //              API Routes Below
+        ////////////////////////////////////////////////////
+
+        path("/api", () -> {
+            get("/categories/", ContentRoute::getCategories, new JsonTransformer());
+        });
+
 
     }
 
