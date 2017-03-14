@@ -52,6 +52,12 @@
             <artifactId>tape</artifactId>
             <version>1.2.3</version>
         </dependency>
+        <!-- Validation -->
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.6</version>
+        </dependency>
         <!-- IO Helpers -->
         <dependency>
             <groupId>commons-io</groupId>

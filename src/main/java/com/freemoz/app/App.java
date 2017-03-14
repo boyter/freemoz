@@ -4,6 +4,7 @@ import com.freemoz.app.config.Values;
 import com.freemoz.app.routes.ContentRoute;
 import com.freemoz.app.routes.EditorRoute;
 import com.freemoz.app.routes.SearchRoute;
+import com.freemoz.app.routes.SuggestRoute;
 import com.freemoz.app.service.Singleton;
 import com.freemoz.app.util.Helpers;
 import com.freemoz.app.util.JsonTransformer;
@@ -35,6 +36,7 @@ public class App {
         get("/about/", (request, response) -> new ModelAndView(null, "about.ftl"), new FreeMarkerEngine());
         get("/become/", (request, response) -> new ModelAndView(null, "become.ftl"), new FreeMarkerEngine());
         get("/suggest/", (request, response) -> new ModelAndView(null, "suggest.ftl"), new FreeMarkerEngine());
+        post("/suggest/", (SuggestRoute::suggest), new FreeMarkerEngine());
 
         // Special routes to preserve the root categories
         get("/Arts/*", (request, response) -> ContentRoute.getCategory(request, response, "Arts"), new FreeMarkerEngine());
@@ -58,7 +60,9 @@ public class App {
         ////////////////////////////////////////////////////
 
         path("/api", () -> {
-            get("/categories/", ContentRoute::getCategories, new JsonTransformer());
+            path("/v1", () -> {
+                get("/categories/", ContentRoute::getCategories, new JsonTransformer());
+            });
         });
 
 
