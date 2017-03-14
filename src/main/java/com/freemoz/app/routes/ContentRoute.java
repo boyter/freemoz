@@ -10,6 +10,7 @@ import spark.Request;
 import spark.Response;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ContentRoute {
     public static ModelAndView getCategory(Request request, Response response, String category) {
@@ -44,11 +45,11 @@ public class ContentRoute {
         return new ModelAndView(map, "category.ftl");
     }
 
-    public static List<StructureDTO> getCategories(Request request, Response response) {
+    public static List<String> getCategories(Request request, Response response) {
         if (!request.queryParams().contains("q")) {
             return new ArrayList<>();
         }
 
-        return Singleton.getContentDAO().searchCategories(request.queryParams("q"));
+        return Singleton.getContentDAO().searchCategories(request.queryParams("q")).stream().map(x -> x.getTopic()).collect(Collectors.toList());
     }
 }
