@@ -56,6 +56,15 @@ public class App {
 
 
         ////////////////////////////////////////////////////
+        //              Editor Routes Below
+        ////////////////////////////////////////////////////
+
+        path("/editor", () -> {
+            get("/", (EditorRoute::editorAdmin), new FreeMarkerEngine());
+            get("/submissions/", (EditorRoute::editorSubmissions), new FreeMarkerEngine());
+        });
+
+        ////////////////////////////////////////////////////
         //              API Routes Below
         ////////////////////////////////////////////////////
 

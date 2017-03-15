@@ -16,7 +16,7 @@ import static spark.Spark.halt;
 public class EditorRoute {
     public static ModelAndView login(Request request, Response response) {
         if (getAuthenticatedUser(request) != null) {
-            response.redirect("/");
+            response.redirect("/editor/");
             halt();
             return null;
         }
@@ -26,7 +26,7 @@ public class EditorRoute {
 
     public static ModelAndView doLogin(Request request, Response response) {
         if (getAuthenticatedUser(request) != null) {
-            response.redirect("/");
+            response.redirect("/editor/");
             halt();
             return null;
         }
@@ -47,7 +47,7 @@ public class EditorRoute {
 
         addAuthenticatedUser(request, user);
 
-        response.redirect("/");
+        response.redirect("/editor/");
         halt();
         return null;
     }
@@ -58,6 +58,26 @@ public class EditorRoute {
         response.redirect("/");
         halt();
         return null;
+    }
+
+    public static ModelAndView editorAdmin(Request request, Response response) {
+        if (getAuthenticatedUser(request) == null) {
+            response.redirect("/login/");
+            halt();
+            return null;
+        }
+
+        return new ModelAndView(null, "editor_admin.ftl");
+    }
+
+    public static ModelAndView editorSubmissions(Request request, Response response) {
+        if (getAuthenticatedUser(request) == null) {
+            response.redirect("/login/");
+            halt();
+            return null;
+        }
+
+        return new ModelAndView(null, "editor_submissions.ftl");
     }
 
     private static void addAuthenticatedUser(Request request, UserDTO user) {
