@@ -75,6 +75,7 @@ public class App {
     private static void preStart() {
         // Setup database
         Singleton.getUserDAO().createTableIfMissing();
+        Singleton.getQueueDAO().createTableIfMissing();
 
         // Start jobs
         //Singleton.getJobService().startJobs();

@@ -85,8 +85,22 @@ public class SuggestRoute {
         }
 
         // Actually add things here
-
         SubmissionDTO submissionDTO = new SubmissionDTO(siteUrl, siteTitle, siteDescription, "", siteTags);
+
+        // TODO Add to in memory queue to be flushed to database queue through backend process
+        boolean suceess = Singleton.getQueueDAO().addSubmission(submissionDTO);
+
+        if (!suceess) {
+            validationErrors.add("Sorry but it appears we were unable to save your submission. Please try again in a few minutes.");
+            map.put("validationErrors", validationErrors);
+            map.put("siteUrl", siteUrl);
+            map.put("siteTitle", siteTitle);
+            map.put("siteDescription", siteDescription);
+            map.put("siteTags", siteTags);
+            map.put("emailAddress", emailAddress);
+
+            return new ModelAndView(map, "suggest.ftl" );
+        }
 
         return new ModelAndView(map, "suggest_success.ftl");
     }

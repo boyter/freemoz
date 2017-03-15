@@ -5,6 +5,7 @@ import com.freemoz.app.config.IDatabaseConfig;
 import com.freemoz.app.config.SQLiteDatabaseConfig;
 import com.freemoz.app.config.Values;
 import com.freemoz.app.dao.ContentDAO;
+import com.freemoz.app.dao.QueueDAO;
 import com.freemoz.app.dao.UserDAO;
 import com.freemoz.app.dto.ContentDTO;
 import com.freemoz.app.dto.SubmissionDTO;
@@ -23,6 +24,7 @@ public class Singleton {
     private static IDatabaseConfig contentDatabaseConfig = null;
     private static UserDAO userDAO = null;
     private static ContentDAO contentDAO = null;
+    private static QueueDAO queueDAO = null;
     private static Helpers helpers = null;
     private static Indexer indexer = null;
     private static Searcher searcher = null;
@@ -77,6 +79,15 @@ public class Singleton {
         return contentDatabaseConfig;
     }
 
+    public synchronized static IDatabaseConfig getSubmissionDatabaseConfig() {
+        if (contentDatabaseConfig == null) {
+            String sqliteFile = (String) Properties.getProperties().getOrDefault(Values.QUEUE_SQLITE_FILE, Values.DEFAULT_QUEUE_SQLITE_FILE);
+            contentDatabaseConfig = new SQLiteDatabaseConfig(sqliteFile);
+        }
+
+        return contentDatabaseConfig;
+    }
+
     public synchronized static JobService getJobService() {
         if (jobService == null) {
             jobService = new JobService();
@@ -107,6 +118,14 @@ public class Singleton {
         }
 
         return contentDAO;
+    }
+
+    public synchronized static QueueDAO getQueueDAO() {
+        if (queueDAO == null) {
+            queueDAO = new QueueDAO();
+        }
+
+        return queueDAO;
     }
 
     public synchronized static Helpers getHelpers() {
