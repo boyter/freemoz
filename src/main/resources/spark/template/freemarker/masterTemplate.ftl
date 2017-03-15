@@ -49,12 +49,12 @@
       <#nested />
 
 
-      <div style="border-top: 1px solid #eee; padding-top:5px; margin-top:10px;">
+      <div style="border-top: 1px solid #eee; padding-top:5px; margin-top:20px;">
       <a href="https://github.com/boyter/freemoz">Free Software under GNU GPL 3.0 License</a> |
       <a href="https://www.elegantthemes.com/blog/freebie-of-the-week/beautiful-flat-icons-for-free">Icons under GNU GPL 2.0 License</a> |
       <a href="https://creativecommons.org/licenses/by/3.0/">Content under Creative Commons Attribution 3.0 Unported License</a>
       </div>
-      <div style="margin-top:10px;">
+      <div style="margin-top:20px;">
           <!-- Requirement as per terms of DMOZ licence http://rdf.dmoz.org/ -->
           <center>
           <table style="background-color: #336600;" border="0" bgcolor="#336600" cellpadding="3" cellspacing="0">

@@ -9,7 +9,8 @@
 </div>
 
 <div class="row">
- <!-- https://www.iconfinder.com/icons/1054957/screwdriver_tools_wrench_icon#size=64 -->
+
+ <div style="margin: 0 auto; width:80%;">
  <div class="col-md-4">
     <h2>
     <img src="/img/icons/arts.png" alt="Arts" height="64px" width="64px" />
@@ -67,6 +68,7 @@
     <img src="/img/icons/sports.png" alt="Sports" height="64px" width="64px" />
     <a href="/Sports/">Sports</a></h2></div>
 
+ </div>
 </div>
 
 </@layout.masterTemplate>
