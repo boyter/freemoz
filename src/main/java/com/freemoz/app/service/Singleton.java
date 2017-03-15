@@ -6,12 +6,17 @@ import com.freemoz.app.config.SQLiteDatabaseConfig;
 import com.freemoz.app.config.Values;
 import com.freemoz.app.dao.ContentDAO;
 import com.freemoz.app.dao.UserDAO;
+import com.freemoz.app.dto.ContentDTO;
+import com.freemoz.app.dto.SubmissionDTO;
 import com.freemoz.app.util.Helpers;
 import com.freemoz.app.util.Properties;
+import org.eclipse.jetty.util.ConcurrentArrayQueue;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
 import org.quartz.impl.StdSchedulerFactory;
+
+import java.util.Queue;
 
 public class Singleton {
     private static IDatabaseConfig userDatabaseConfig = null;
@@ -23,10 +28,11 @@ public class Singleton {
     private static Searcher searcher = null;
     private static JobService jobService = null;
     private static EditorService editorService = null;
+    private static SubmissionService submissionService = null;
     private static Scheduler scheduler;
+    private static Queue<SubmissionDTO> submissionQueue = null;
 
     public static synchronized Scheduler getScheduler() {
-
         if (scheduler == null) {
             try {
                 SchedulerFactory sf = new StdSchedulerFactory();
@@ -35,6 +41,22 @@ public class Singleton {
         }
 
         return scheduler;
+    }
+
+    public synchronized static SubmissionService getSubmissionService() {
+        if (submissionService == null) {
+            submissionService = new SubmissionService();
+        }
+
+        return submissionService;
+    }
+
+    public synchronized static Queue<SubmissionDTO> getSubmissionQueue() {
+        if (submissionQueue == null) {
+            submissionQueue = new ConcurrentArrayQueue<>();
+        }
+
+        return submissionQueue;
     }
 
     public synchronized static IDatabaseConfig getUserDatabaseConfig() {

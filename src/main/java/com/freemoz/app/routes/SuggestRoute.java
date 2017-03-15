@@ -1,6 +1,7 @@
 package com.freemoz.app.routes;
 
 import com.freemoz.app.config.Values;
+import com.freemoz.app.dto.SubmissionDTO;
 import com.freemoz.app.service.Singleton;
 import org.apache.commons.validator.routines.UrlValidator;
 import spark.ModelAndView;
@@ -82,6 +83,10 @@ public class SuggestRoute {
             // Probably an automated spam-bot so just pretend it worked
             return new ModelAndView(map, "suggest_success.ftl");
         }
+
+        // Actually add things here
+
+        SubmissionDTO submissionDTO = new SubmissionDTO(siteUrl, siteTitle, siteDescription, "", siteTags);
 
         return new ModelAndView(map, "suggest_success.ftl");
     }
