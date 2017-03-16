@@ -3,8 +3,7 @@
 
 <h1>Suggest</h1>
 <p>Suggest a site to be added to the index here.</p>
-<p>Coming soon...</p>
-<!--
+
 <#if validationErrors??>
     <#list validationErrors>
         <#items as result>
@@ -15,7 +14,7 @@
 
 
 
-<form method="post">
+<form method="post" id="submit-form">
     <div class="form-group">
         <label for="siteUrl">Site URL</label>
         <input type="text" name="siteUrl" class="form-control" id="siteUrl" maxlength="1000" placeholder="https://mycoolsite.com/" <#if siteUrl??>value="${siteUrl?html}"</#if> >
@@ -73,7 +72,17 @@
             <input type="checkbox" id="haveConfirmed" name="haveConfirmed"> I confirm that all information submitted will be licenced under the <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons 3.0</a> licence.
         </label>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+
+    <button
+    class="btn btn-primary g-recaptcha"
+    data-sitekey="6LcfSxkUAAAAAOk6ebvveUvJMnDt1xzVPUqe3cNS"
+    data-callback="onSubmit">Submit</button>
 </form>
--->
+
+<script>
+function onSubmit(token) {
+    document.getElementById("submit-form").submit();
+}
+</script>
+
 </@layout.masterTemplate>

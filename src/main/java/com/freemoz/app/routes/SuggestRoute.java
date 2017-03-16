@@ -3,11 +3,17 @@ package com.freemoz.app.routes;
 import com.freemoz.app.config.Values;
 import com.freemoz.app.dto.SubmissionDTO;
 import com.freemoz.app.service.Singleton;
+import com.freemoz.app.util.*;
+import com.freemoz.app.util.Properties;
 import org.apache.commons.validator.routines.UrlValidator;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.*;
 
 public class SuggestRoute {
@@ -26,6 +32,7 @@ public class SuggestRoute {
         String siteDescription = getStringValue(request, "siteDescription");
         String siteTags = getStringValue(request, "siteTags");
         String emailAddress = getStringValue(request, "emailAddress");
+        String recaptchaResponse = getStringValue(request, "g-recaptcha-response");
         boolean haveConfirmed = request.queryParams().contains("haveConfirmed");
 
         if (!urlValidator.isValid(siteUrl)) {
@@ -67,6 +74,29 @@ public class SuggestRoute {
             isValid = false;
             validationErrors.add("You must confirm licence agreement.");
         }
+
+        // Check CAPTCHA
+        HttpRequest httpRequest = new HttpRequest("https://www.google.com/recaptcha/api/siteverify");
+        List<NameValuePair> urlParameters = new ArrayList<>();
+        urlParameters.add(new BasicNameValuePair("secret", Properties.getProperties().getProperty(Values.RECAPTHCA_SECRET_KEY, Values.DEFAULT_RECAPTHCA_SECRET_KEY)));
+        urlParameters.add(new BasicNameValuePair("response", recaptchaResponse));
+        String googleRecaptchaResponse = null;
+        try {
+            googleRecaptchaResponse = httpRequest.executePost(urlParameters);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (Singleton.getHelpers().isNullOrWhitespace(googleRecaptchaResponse)) {
+            isValid = false;
+            validationErrors.add("There was a problem validating against the reCAPTCHA service. Please try again.");
+        }
+
+        if (googleRecaptchaResponse.contains("false")) {
+            isValid = false;
+            validationErrors.add("It appears that you were flagged as a bot by reCAPTCHA. Please try again.");
+        }
+
 
         if (!isValid) {
             map.put("validationErrors", validationErrors);

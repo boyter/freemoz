@@ -24,6 +24,9 @@ public class Values {
     public static final String INDEX_LOCATION = "index_location";
     public static final String DEFAULT_INDEX_LOCATION = "./index/";
 
+    public static final String RECAPTHCA_SECRET_KEY = "recaptcha_secret_key";
+    public static final String DEFAULT_RECAPTHCA_SECRET_KEY = "";
+
     public static final String EMPTY_STRING = "";
 
 

@@ -54,7 +54,7 @@ public class Indexer {
 
                 doc.add(new TextField("title", contentDTO.getTitle().toLowerCase(), Field.Store.NO));
                 doc.add(new TextField("description", contentDTO.getDescription().toLowerCase(), Field.Store.NO));
-                doc.add(new TextField("topics", contentDTO.getTopic().replace("//", " "), Field.Store.NO));
+                doc.add(new TextField("topics", contentDTO.getTopic().replace("//", " ").replace("_", " "), Field.Store.NO));
                 doc.add(new TextField("url", contentDTO.getUrl().replace(".", " "), Field.Store.NO));
 
 

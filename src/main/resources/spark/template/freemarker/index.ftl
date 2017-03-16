@@ -10,7 +10,7 @@
  <div style="text-align: center;">
      <form class="form-inline" method="GET" action="/search/">
      <div class="form-group">
-       <input style="width: 400px;" type="text" name="q" class="form-control" placeholder="Search Freemoz...">
+       <input style="width: 400px;" autofocus="autofocus" type="text" name="q" class="form-control" placeholder="Search Freemoz...">
      </div>
      <input class="btn btn-success" type="submit" value="Search" />
      </form>
