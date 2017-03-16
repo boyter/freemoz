@@ -22,6 +22,7 @@ import java.util.Queue;
 public class Singleton {
     private static IDatabaseConfig userDatabaseConfig = null;
     private static IDatabaseConfig contentDatabaseConfig = null;
+    private static IDatabaseConfig queueDatabaseConfig = null;
     private static UserDAO userDAO = null;
     private static ContentDAO contentDAO = null;
     private static QueueDAO queueDAO = null;
@@ -80,12 +81,12 @@ public class Singleton {
     }
 
     public synchronized static IDatabaseConfig getSubmissionDatabaseConfig() {
-        if (contentDatabaseConfig == null) {
+        if (queueDatabaseConfig == null) {
             String sqliteFile = (String) Properties.getProperties().getOrDefault(Values.QUEUE_SQLITE_FILE, Values.DEFAULT_QUEUE_SQLITE_FILE);
-            contentDatabaseConfig = new SQLiteDatabaseConfig(sqliteFile);
+            queueDatabaseConfig = new SQLiteDatabaseConfig(sqliteFile);
         }
 
-        return contentDatabaseConfig;
+        return queueDatabaseConfig;
     }
 
     public synchronized static JobService getJobService() {

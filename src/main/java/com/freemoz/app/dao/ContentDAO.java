@@ -49,6 +49,7 @@ public class ContentDAO {
             }
         }
         catch (SQLException ex) {
+            System.out.println(ex);
         }
         finally {
             this.helpers.closeQuietly(resultSet);
