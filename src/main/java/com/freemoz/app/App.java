@@ -88,6 +88,6 @@ public class App {
         Singleton.getQueueDAO().createTableIfMissing();
 
         // Start jobs
-//        Singleton.getJobService().startJobs();
+        Singleton.getJobService().startJobs();
     }
 }

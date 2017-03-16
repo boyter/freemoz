@@ -48,12 +48,15 @@ public class Indexer {
 
                 Document doc = new Document();
                 // Path is the primary key for documents
-                String primaryKey =  "" + contentDTO.getId();
+                String primaryKey =  Values.EMPTY_STRING + contentDTO.getId();
                 Field pathField = new StringField(Values.PATH, primaryKey, Field.Store.YES);
                 doc.add(pathField);
 
                 doc.add(new TextField("title", contentDTO.getTitle().toLowerCase(), Field.Store.NO));
                 doc.add(new TextField("description", contentDTO.getDescription().toLowerCase(), Field.Store.NO));
+                doc.add(new TextField("topics", contentDTO.getTopic().replace("//", " "), Field.Store.NO));
+                doc.add(new TextField("url", contentDTO.getUrl().replace(".", " "), Field.Store.NO));
+
 
                 writer.updateDocument(new Term(Values.PATH, primaryKey), doc);
             }

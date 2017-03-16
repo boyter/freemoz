@@ -77,7 +77,7 @@
  <div class="col-md-4">
     <h2>
     <img src="/img/icons/world.png" alt="World" height="64px" width="64px" />
-    <a href="/Sports/">World</a></h2></div>
+    <a href="/World/">World</a></h2></div>
 
  </div>
 </div>
