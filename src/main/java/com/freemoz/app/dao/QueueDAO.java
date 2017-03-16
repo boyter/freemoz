@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class QueueDAO {
@@ -27,6 +28,35 @@ public class QueueDAO {
         this.gson = gson;
     }
 
+
+    public synchronized SubmissionDTO getNextSubmission() {
+        SubmissionDTO submissionDTO = null;
+
+        Connection connection;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = this.dbConfig.getConnection();
+            preparedStatement = connection.prepareStatement("SELECT id,bucket,timeout,status,data FROM submission WHERE status = 0 AND timeout < ? AND bucket = ? LIMIT 1;");
+
+            preparedStatement.setLong(1, System.currentTimeMillis());
+            preparedStatement.setString(2, "A");
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                submissionDTO = gson.fromJson(resultSet.getString("data"), SubmissionDTO.class);
+            }
+        }
+        catch(SQLException ex) {
+        }
+        finally {
+            this.helpers.closeQuietly(preparedStatement);
+            this.helpers.closeQuietly(resultSet);
+        }
+
+        return submissionDTO;
+    }
 
     public synchronized boolean addSubmission(SubmissionDTO submissionDTO) {
         Connection connection;
