@@ -2,13 +2,20 @@
 <@layout.masterTemplate title="Freemoz.org a spiritual sucessor to dmoz.org">
 
 
-<div class="jumbotron" id="jumbotron">
-
-    <h1>Freemoz.org a spiritual sucessor to dmoz.org</h1>
-    <h2>#OrganizeTheWeb</h2>
+<div class="row" style="text-align: center;">
+    <h1>Welcome to Freemoz.org a spiritual successor to dmoz.org</h1>
 </div>
 
 <div class="row">
+ <div style="text-align: center;">
+     <form class="form-inline" method="GET" action="/search/">
+     <div class="form-group">
+       <input style="width: 400px;" type="text" name="q" class="form-control" placeholder="Search Freemoz...">
+     </div>
+     <input class="btn btn-success" type="submit" value="Search" />
+     </form>
+ </div>
+
 
  <div style="margin: 0 auto; width:80%;">
  <div class="col-md-4">
@@ -67,6 +74,10 @@
     <h2>
     <img src="/img/icons/sports.png" alt="Sports" height="64px" width="64px" />
     <a href="/Sports/">Sports</a></h2></div>
+ <div class="col-md-4">
+    <h2>
+    <img src="/img/icons/world.png" alt="World" height="64px" width="64px" />
+    <a href="/Sports/">World</a></h2></div>
 
  </div>
 </div>

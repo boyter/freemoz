@@ -36,7 +36,7 @@ public class App {
         get("/about/", (request, response) -> new ModelAndView(null, "about.ftl"), new FreeMarkerEngine());
         get("/become/", (request, response) -> new ModelAndView(null, "become.ftl"), new FreeMarkerEngine());
         get("/suggest/", (request, response) -> new ModelAndView(null, "suggest.ftl"), new FreeMarkerEngine());
-//        post("/suggest/", (SuggestRoute::suggest), new FreeMarkerEngine());
+        post("/suggest/", (SuggestRoute::suggest), new FreeMarkerEngine());
 
         // Special routes to preserve the root categories
         get("/Arts/*", (request, response) -> ContentRoute.getCategory(request, response, "Arts"), new FreeMarkerEngine());
@@ -53,6 +53,7 @@ public class App {
         get("/Shopping/*", (request, response) -> ContentRoute.getCategory(request, response, "Shopping"), new FreeMarkerEngine());
         get("/Society/*", (request, response) -> ContentRoute.getCategory(request, response, "Society"), new FreeMarkerEngine());
         get("/Sports/*", (request, response) -> ContentRoute.getCategory(request, response, "Sports"), new FreeMarkerEngine());
+        get("/World/*", (request, response) -> ContentRoute.getCategory(request, response, "World"), new FreeMarkerEngine());
 
 
         ////////////////////////////////////////////////////
@@ -68,11 +69,11 @@ public class App {
         //              API Routes Below
         ////////////////////////////////////////////////////
 
-//        path("/api", () -> {
-//            path("/v1", () -> {
-//                get("/categories/", ContentRoute::getCategories, new JsonTransformer());
-//            });
-//        });
+        path("/api", () -> {
+            path("/v1", () -> {
+                get("/categories/", ContentRoute::getCategories, new JsonTransformer());
+            });
+        });
 
 
     }
@@ -87,6 +88,6 @@ public class App {
         Singleton.getQueueDAO().createTableIfMissing();
 
         // Start jobs
-        Singleton.getJobService().startJobs();
+//        Singleton.getJobService().startJobs();
     }
 }

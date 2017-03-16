@@ -3,8 +3,7 @@
 
 <h1>Suggest</h1>
 <p>Suggest a site to be added to the index here.</p>
-<p>Coming soon</p>
-<!--
+
 <#if validationErrors??>
     <#list validationErrors>
         <#items as result>
@@ -75,5 +74,5 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
--->
+
 </@layout.masterTemplate>
