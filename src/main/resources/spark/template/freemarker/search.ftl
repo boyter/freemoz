@@ -21,7 +21,8 @@
         <dt><a href="${result.url}">${result.title}</a></dt>
         <dd>
         ${result.description}<br>
-        <a href="${result.url}">${result.url}</a>
+        <a href="${result.url}">${result.url}</a><br />
+        <small style="color:#aaa;">${result.topic}</small>
         </dd><br>
     </#items>
     </dl>
