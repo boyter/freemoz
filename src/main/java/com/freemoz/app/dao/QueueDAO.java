@@ -2,6 +2,7 @@ package com.freemoz.app.dao;
 
 
 import com.freemoz.app.config.IDatabaseConfig;
+import com.freemoz.app.config.Values;
 import com.freemoz.app.dto.SubmissionDTO;
 import com.freemoz.app.service.Singleton;
 import com.freemoz.app.util.Helpers;
@@ -28,9 +29,9 @@ public class QueueDAO {
         this.gson = gson;
     }
 
-
     public synchronized SubmissionDTO getNextSubmission() {
         SubmissionDTO submissionDTO = null;
+        int submissionInt = -1;
 
         Connection connection;
         PreparedStatement preparedStatement = null;
@@ -45,6 +46,7 @@ public class QueueDAO {
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
+                submissionInt = resultSet.getInt("id");
                 submissionDTO = gson.fromJson(resultSet.getString("data"), SubmissionDTO.class);
             }
         }
@@ -55,7 +57,36 @@ public class QueueDAO {
             this.helpers.closeQuietly(resultSet);
         }
 
+        if (submissionDTO != null) {
+            boolean lockedSubmission = this.lockSubmission(submissionInt);
+
+            if (lockedSubmission == false) {
+                return null;
+            }
+        }
+
         return submissionDTO;
+    }
+
+    private synchronized boolean lockSubmission(int submissionInt) {
+        Connection connection;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = this.dbConfig.getConnection();
+            preparedStatement = connection.prepareStatement("UPDATE submission SET timeout = ? WHERE id = ? LIMIT 1;");
+            preparedStatement.setLong(1, System.currentTimeMillis() + Values.QUEUE_LOCK_TIMEOUT);
+            preparedStatement.setInt(2, submissionInt);
+            preparedStatement.execute();
+        }
+        catch(SQLException ex) {
+            return false;
+        }
+        finally {
+            this.helpers.closeQuietly(preparedStatement);
+        }
+
+        return true;
     }
 
     public synchronized boolean addSubmission(SubmissionDTO submissionDTO) {

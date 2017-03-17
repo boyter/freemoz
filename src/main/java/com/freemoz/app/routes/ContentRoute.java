@@ -31,7 +31,7 @@ public class ContentRoute {
             List<String> split = Arrays.asList(newSplat.split("/"));
 
             for (int i=split.size() -1; i != 0; i--) {
-                breadCrumb.add(new BreadCrumbDTO(String.join("/", split.subList(0, i + 1)), split.get(i)));
+                breadCrumb.add(new BreadCrumbDTO(String.join("/", split.subList(0, i + 1)), split.get(i).replace("_", " ")));
             }
             Collections.reverse(breadCrumb);
         }

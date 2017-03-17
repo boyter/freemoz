@@ -30,6 +30,8 @@ public class Values {
     public static final String EMPTY_STRING = "";
 
 
+    public static final int QUEUE_LOCK_TIMEOUT = 60 * 5 * 1000; // 5 minutes in milliseconds
+
     // Used for indexing
     public static final String PATH = "path";
     public static final String TITLE = "title";

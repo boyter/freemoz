@@ -1,6 +1,7 @@
 package com.freemoz.app.routes;
 
 
+import com.freemoz.app.dao.QueueDAO;
 import com.freemoz.app.dto.UserDTO;
 import com.freemoz.app.service.EditorService;
 import com.freemoz.app.service.Singleton;
@@ -76,6 +77,7 @@ public class EditorRoute {
             halt();
             return null;
         }
+        
 
         return new ModelAndView(null, "editor_submissions.ftl");
     }
