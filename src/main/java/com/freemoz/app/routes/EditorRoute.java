@@ -77,7 +77,7 @@ public class EditorRoute {
             halt();
             return null;
         }
-        
+
 
         return new ModelAndView(null, "editor_submissions.ftl");
     }

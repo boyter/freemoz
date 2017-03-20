@@ -13,10 +13,16 @@ DONE
 - Establish goals
 - Investigate https://github.com/kremso/dmoz-parser for parsing existing dmoz data
 - Build data converters
-
-TODO
 - Add letsencrypt https cert https://certbot.eff.org/#ubuntuxenial-nginx
 - Setup website
+
+TODO
+- Allow submissions IN PROGRESS
+- Add basic admin process to approve submissions needs to do the following,
+  - Pop the next available submission from the queue and lock it for period of time
+  - Allow editing (if edit it goes back into the queue)
+  - Allow searching for category to place it
+  - Allow searching for existing site and the like
 - Investigate pulling infromation from https://github.com/sindresorhus/awesome
 
 GOALS
