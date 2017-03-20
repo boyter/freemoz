@@ -25,6 +25,7 @@ TODO
   - Allow searching for existing site and the like
 - Investigate pulling infromation from https://github.com/sindresorhus/awesome
 - Automate refresh of SSL cert
+- "Arts Movies" search on:  AOL - Ask - Bing - DuckDuckGo - Gigablast - Google - ixquick - Yahoo - Yandex - Yippy add to bottom of search
 
 GOALS
 - A new version of DMOZ
