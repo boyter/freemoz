@@ -58,13 +58,13 @@ public class QueueDAO {
             this.helpers.closeQuietly(resultSet);
         }
 
-        if (submissionDTO != null) {
-            boolean lockedSubmission = this.lockSubmission(submissionInt, userDTO);
-
-            if (lockedSubmission == false) {
-                return null;
-            }
-        }
+//        if (submissionDTO != null) {
+//            boolean lockedSubmission = this.lockSubmission(submissionInt, userDTO);
+//
+//            if (lockedSubmission == false) {
+//                return null;
+//            }
+//        }
 
         return submissionDTO;
     }

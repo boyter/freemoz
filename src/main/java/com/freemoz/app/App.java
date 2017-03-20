@@ -24,7 +24,15 @@ public class App {
         preStart();
 
         Spark.port(getServerPort());
-        Spark.staticFileLocation("/public");
+
+        if (1 == 1) {
+            String projectDir = System.getProperty("user.dir");
+            String staticDir = "/src/main/resources/public/";
+            staticFiles.externalLocation(projectDir + staticDir);
+        } else {
+            Spark.staticFileLocation("/public");
+        }
+
 
         get("/", (request, response) -> new ModelAndView(null, "index.ftl"), new FreeMarkerEngine());
 
@@ -72,6 +80,7 @@ public class App {
         path("/api", () -> {
             path("/v1", () -> {
                 get("/categories/", ContentRoute::getCategories, new JsonTransformer());
+                get("/submission/", ContentRoute::getSubmission, new JsonTransformer());
             });
         });
 

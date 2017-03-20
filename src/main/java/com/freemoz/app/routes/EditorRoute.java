@@ -1,16 +1,11 @@
 package com.freemoz.app.routes;
 
 
-import com.freemoz.app.dao.QueueDAO;
 import com.freemoz.app.dto.UserDTO;
-import com.freemoz.app.service.EditorService;
 import com.freemoz.app.service.Singleton;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static spark.Spark.halt;
 
@@ -90,7 +85,7 @@ public class EditorRoute {
         request.session().removeAttribute("user");
     }
 
-    private static String getAuthenticatedUser(Request request) {
+    public static String getAuthenticatedUser(Request request) {
         return request.session().attribute("user");
     }
 }

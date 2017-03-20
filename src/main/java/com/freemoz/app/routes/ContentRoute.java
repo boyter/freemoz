@@ -1,9 +1,8 @@
 package com.freemoz.app.routes;
 
 
-import com.freemoz.app.dto.BreadCrumbDTO;
-import com.freemoz.app.dto.ContentDTO;
-import com.freemoz.app.dto.StructureDTO;
+import com.freemoz.app.dto.*;
+import com.freemoz.app.service.EditorService;
 import com.freemoz.app.service.Singleton;
 import spark.ModelAndView;
 import spark.Request;
@@ -51,5 +50,11 @@ public class ContentRoute {
         }
 
         return Singleton.getContentDAO().searchCategories(request.queryParams("q")).stream().map(x -> x.getTopic()).collect(Collectors.toList());
+    }
+
+    public static SubmissionDTO getSubmission(Request request, Response response) {
+        String authenticatedUser = EditorRoute.getAuthenticatedUser(request);
+        UserDTO userByUsername = Singleton.getUserDAO().getUserByUsername(authenticatedUser);
+        return Singleton.getQueueDAO().getNextSubmission(userByUsername);
     }
 }
