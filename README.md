@@ -24,6 +24,7 @@ TODO
   - Allow searching for category to place it
   - Allow searching for existing site and the like
 - Investigate pulling infromation from https://github.com/sindresorhus/awesome
+- Automate refresh of SSL cert
 
 GOALS
 - A new version of DMOZ
