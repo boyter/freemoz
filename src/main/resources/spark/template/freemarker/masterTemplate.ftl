@@ -10,7 +10,6 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel='shortcut icon' type='image/x-icon' href='/img/favicon.ico' />
     <script language="javascript" type="text/javascript" src="/js/script.js"></script>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
   </head>
   <body>
 

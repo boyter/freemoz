@@ -1,16 +1,3 @@
-// Main component that does everything
-var MainComponent = {
-    view: function(ctrl) {
-        return m("div", [
-                m('input', {'value': SubmissionModel.url}, ''),
-                m('input', {'value': SubmissionModel.title}, ''),
-                m('textarea', SubmissionModel.description),
-                m('input', {'value': SubmissionModel.tags}, ''),
-            ]);
-    }
-};
-
-
 var SubmissionModel = {
     currentlyloading: false,
     url: '',
@@ -29,9 +16,61 @@ var SubmissionModel = {
             SubmissionModel.description = e.description;
             SubmissionModel.tags = e.tags;
         }).then( function(e) {
-            // Do something?
         });
     },
+};
+
+// Main component that does everything
+var MainComponent = {
+    controller: function() {
+        return {
+            getNextSubmission: function() {
+                SubmissionModel.getNextSubmission();
+            }
+        }
+    },
+    view: function(ctrl) {
+        return m('div', [
+                m('div', [
+                    m('h4', 'Sample Display'),
+                    m('dl', [
+                        m('dt', [
+                            m('span.glyphicon glyphicon-list-alt'),
+                            m('a', {
+                                'href': SubmissionModel.url, 
+                                'target': '_new'
+                            }, ' ' + SubmissionModel.title)
+                        ]),
+                        m('dd', SubmissionModel.description)
+                    ])
+                ]),
+                m('div.form-group', [
+                    m('label', 'Submission URL'),
+                    m('input.form-control', {
+                        'value': SubmissionModel.url, 
+                        'onkeydown': function (e) { 
+                            m.withAttr('value', SubmissionModel.url);
+                        }
+                    }, ''),
+                    m('p.help-block', 'Is this URL already in the database? Is it HTTPS?')
+                ]),
+                m('div.form-group', [
+                    m('label', 'Submission Title'),
+                    m('input.form-control', {'value': SubmissionModel.title}, ''),
+                    m('p.help-block', 'Is the title meaningful? Short and descriptive?')
+                ]),
+                m('div.form-group', [
+                    m('label', 'Submission Description'),
+                    m('textarea.form-control', SubmissionModel.description),
+                    m('p.help-block', 'Is the derscription accurate? Is it brief and meaningful?')
+                ]),
+                m('div.form-group', [
+                    m('label', 'Submission Tags'),
+                    m('input.form-control', {'value': SubmissionModel.tags}, ''),
+                    m('p.help-block', 'Are the tags applicable to this submission? Are there too many?')
+                ]) 
+            ]);
+    }
 };
 
 m.mount(document.getElementsByClassName('submissions')[0], MainComponent);
