@@ -101,14 +101,14 @@ var MainComponent = {
                         maxlength: '255',
                         oninput: m.withAttr('value', function(value) { SubmissionModel.updateTitle(value); })
                     }, ''),
-                    m('p.help-block', 'Is the title meaningful? Short and descriptive? Is the spelling and grammer correct?')
+                    m('p.help-block', 'Is the title meaningful? Short and descriptive? Is the spelling and grammar correct?')
                 ]),
                 m('div.form-group', [
                     m('label', 'Submission Description (~' +  SubmissionModel.getWordCount(SubmissionModel.description) + ')'),
                     m('textarea.form-control', {
                         oninput: m.withAttr('value', function(value) { SubmissionModel.updateDescription(value); })
                     }, SubmissionModel.description),
-                    m('p.help-block', 'About 30 words? Is the description accurate? Is it brief and meaningful? Is the spelling and grammer correct?')
+                    m('p.help-block', 'About 30 words? Is the description accurate? Is it brief and meaningful? Is the spelling and grammar correct?')
                 ]),
                 m('div.form-group', [
                     m('label', 'Submission Tags'),
@@ -117,7 +117,7 @@ var MainComponent = {
                         maxlength: '255',
                         oninput: m.withAttr('value', function(value) { SubmissionModel.updateTags(value); })
                     }, ''),
-                    m('p.help-block', 'Are the tags applicable to this submission? Are there too many? Is the spelling and grammer correct?')
+                    m('p.help-block', 'Are the tags applicable to this submission? Are there too many? Is the spelling and grammar correct?')
                 ]),
                 m('input.btn.btn-primary', {'type': 'submit', 'value': SubmissionModel.dirty ? 'Submit for Review' : 'Approve' }, ''),
                 m('span', ' '),
