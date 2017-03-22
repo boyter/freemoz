@@ -5,6 +5,8 @@ var SubmissionModel = {
     title: '',
     description: '',
     tags: '',
+    interval: null,
+    countdown: 300,
 
     updateUrl: function(value) {
         SubmissionModel.dirty = true; 
@@ -18,8 +20,13 @@ var SubmissionModel = {
         SubmissionModel.dirty = true; 
         SubmissionModel.description = value;
     },
+    updateTags: function(value) {
+        SubmissionModel.dirty = true; 
+        SubmissionModel.tags = value;
+    },
     getNextSubmission: function() {
         SubmissionModel.currentlyloading = true;
+        clearInterval(SubmissionModel.interval);
         m.redraw();
 
         m.request({method: 'GET', url: '/api/v1/submission/'}).then(function(e) {
@@ -29,6 +36,16 @@ var SubmissionModel = {
             SubmissionModel.description = e.description;
             SubmissionModel.tags = e.tags;
             SubmissionModel.dirty = false;
+            SubmissionModel.countdown = 300;
+
+            SubmissionModel.interval = setInterval(function() { 
+                if (SubmissionModel.countdown > 0) {
+                    SubmissionModel.countdown--;
+                    m.redraw();
+                }
+            }, 1000);
+
+
         }).then(function(e) {
         });
     },
@@ -38,23 +55,35 @@ var SubmissionModel = {
     }
 };
 
+//glyphicon glyphicon-time
+
 // Main component that does everything
 var MainComponent = {
     oninit: SubmissionModel.getNextSubmission,
     view: function() {
         return m('div', [
                 m('div', [
-                    m('h4', 'Sample Display'),
-                    m('dl', [
-                        m('dt', [
-                            m('span.glyphicon glyphicon-list-alt'),
-                            m('a', {
-                                'href': SubmissionModel.url, 
-                                'target': '_new'
-                            }, ' ' + SubmissionModel.title)
-                        ]),
-                        m('dd', SubmissionModel.description)
-                    ])
+                    m('h4', 'Preview of Submission'),
+                    m('div.sample-display', 
+                        m('dl', [
+                            m('dt', [
+                                m('span.glyphicon glyphicon-list-alt'),
+                                m('a', {
+                                    'href': SubmissionModel.url, 
+                                    'target': '_new'
+                                }, ' ' + SubmissionModel.title)
+                            ]),
+                            m('dd', [
+                                m('span', SubmissionModel.description),
+                                m('br'),
+                                m('small', SubmissionModel.tags)
+                            ])
+                        ])
+                    )
+                ]),
+                m('div.alert.alert-info', {role: 'alert'}, [
+                    m('span.glyphicon.glyphicon-time', ''),
+                    m('span', ' You can edit/approve this submission for another ' + SubmissionModel.countdown + ' seconds before it is returned to the queue.')
                 ]),
                 m('div.form-group', [
                     m('label', 'Submission URL'),
@@ -86,10 +115,13 @@ var MainComponent = {
                     m('input.form-control', {
                         value: SubmissionModel.tags,
                         maxlength: '255',
+                        oninput: m.withAttr('value', function(value) { SubmissionModel.updateTags(value); })
                     }, ''),
                     m('p.help-block', 'Are the tags applicable to this submission? Are there too many? Is the spelling and grammer correct?')
                 ]),
-                m('input.btn.btn-primary', {'type': 'submit', 'value': SubmissionModel.dirty ? 'Submit for Review' : 'Approve' }, '')
+                m('input.btn.btn-primary', {'type': 'submit', 'value': SubmissionModel.dirty ? 'Submit for Review' : 'Approve' }, ''),
+                m('span', ' '),
+                m('input.btn.btn-default', {'type': 'submit', 'value': 'Request Another Submission'}, '')
             ]);
     }
 };
