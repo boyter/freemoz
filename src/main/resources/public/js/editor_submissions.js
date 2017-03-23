@@ -194,18 +194,21 @@ var MainComponent = {
                                 m('br'),
                                 m('small', SubmissionModel.tags)
                             ])
-                        ]),
-                        m('p', [
-                            m('small', 'Possible Duplicates '),
-                            _.map(SearchModel.getPossibleDuplicates(), function(res, ind) {
-                                return m('small', [
-                                    m('a', { href: res.url }, res.title + ' (' +  res.url + ')'),
-                                    m('span', ' ')
-                                ])
-                            })
-                        ]),
+                        ])
                     ])
                 ]),
+                m('p', [
+                    m('small', 'Possible Duplicates '),
+                    m('ul', _.map(SearchModel.getPossibleDuplicates(), function(res, ind) {
+                        return m('li', 
+                            m('small', [
+                                m('a', { href: res.url }, res.title + ' (' +  res.url + ')'),
+                                m('span', ' ')
+                            ])
+                        )
+                    }))
+                ]),
+
                 m('div.alert.alert-info', {role: 'alert'}, [
                     m('span.glyphicon.glyphicon-time', ''),
                     m('span', ' You can edit/approve this submission for another ' + SubmissionModel.countdown + ' seconds before it is returned to the queue.')
