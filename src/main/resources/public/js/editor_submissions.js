@@ -1,5 +1,10 @@
 var VectorSpace = {
+    cache: {},
     buildConcordance: function(string) {
+        if (VectorSpace.cache[string] !== undefined) {
+            return VectorSpace.cache[string];
+        }
+
         string = string.toLowerCase();
         string = string.replace(/\W+/g, ' ');
         string = string.replace(/\s+/g, ' ');
@@ -8,7 +13,7 @@ var VectorSpace = {
 
         var split = string.split(' ');
 
-        for(var i = 0; i < split.length; i++) {
+        for (var i = 0; i < split.length; i++) {
             if (concordance[split[i]] === undefined) {
                 concordance[split[i]] = 1;
             }
@@ -17,16 +22,36 @@ var VectorSpace = {
             }
         }
 
+        VectorSpace.cache[string] = concordance;
+
         return concordance;
     },
-    magnitude: function(concordance) {
-        var total = 0;
+    relation: function(con1, con2) {
+        var magnitude = function(concordance) {
+            var total = 0;
 
-        for(var key in concordance) {
-            total += Math.pow(concordance[key], 2);
+            for (var key in concordance) {
+                total += Math.pow(concordance[key], 2);
+            }
+
+            return Math.sqrt(total);
+        };
+
+        var topvalue = 0;
+        var mag = magnitude(con1) * magnitude(con2);
+
+
+        for (var k in con1) {
+            if (con2[k] !== undefined) {
+                topvalue = topvalue + (con1[k] * con2[k])
+            }
         }
 
-        return Math.sqrt(total);
+        if (mag != 0) {
+            return topvalue / mag;
+        }
+
+        return 0;
     }
 }
 
@@ -35,30 +60,30 @@ var SearchModel = {
     resultsUrl: [],
     resultsTitle: [],
     resultsDescription: [],
-    getSimilarByUrl: function(searchterm) {
+    getSimilarByUrl: _.debounce(function(searchterm) {
         searchterm = searchterm.replace(/\W+/g, ' ');
         m.request({method: 'GET', url: '/api/v1/searchurl/?q=' + encodeURIComponent(searchterm)}).then(function(e) {
             if (e && e.results) {
                 SearchModel.resultsUrl = e.results;
             }
         });
-    },
-    getSimilarByTitle: function(searchterm) {
+    }, 300),
+    getSimilarByTitle: _.debounce(function(searchterm) {
         searchterm = searchterm.replace(/\W+/g, ' ');
         m.request({method: 'GET', url: '/api/v1/search/?q=' + encodeURIComponent(searchterm)}).then(function(e) {
             if (e && e.results) {
                 SearchModel.resultsTitle = e.results;
             }
         });
-    },
-    getSimilarByDescription: function(searchterm) {
+    }, 300),
+    getSimilarByDescription: _.debounce(function(searchterm) {
         searchterm = searchterm.replace(/\W+/g, ' ');
         m.request({method: 'GET', url: '/api/v1/searchdescription/?q=' + encodeURIComponent(searchterm)}).then(function(e) {
             if (e && e.results) {
                 SearchModel.resultsDescription = e.results;
             }
         });
-    },
+    }, 300),
     getPossibleDuplicates: function() {
         var result = _.first(SearchModel.resultsTitle, 5).concat(
             _.first(SearchModel.resultsUrl, 5)
@@ -69,9 +94,13 @@ var SearchModel = {
         result = _.uniq(result);
 
         result.sort(
-          function(x, y) {
-             return x - y;
-          }
+            function(x, y) {
+                var con1 = VectorSpace.buildConcordance([x.url, x.title, x.description].join(' '))
+                var con2 = VectorSpace.buildConcordance([y.url, y.title, y.description].join(' '))
+                var con3 = VectorSpace.buildConcordance([SubmissionModel.url, SubmissionModel.title, SubmissionModel.description].join(' '))
+
+                return VectorSpace.relation(con2, con3) - VectorSpace.relation(con1, con3);
+            }
         );
 
         return result;
@@ -157,7 +186,8 @@ var MainComponent = {
                                 m('a', {
                                     'href': SubmissionModel.url, 
                                     'target': '_new'
-                                }, ' ' + SubmissionModel.title)
+                                }, ' ' + SubmissionModel.title),
+                                m('small', ' (' + SubmissionModel.url + ')')
                             ]),
                             m('dd', [
                                 m('span', SubmissionModel.description),
@@ -215,6 +245,8 @@ var MainComponent = {
                     m('p.help-block', 'Are the tags applicable to this submission? Are there too many? Is the spelling and grammar correct?')
                 ]),
                 m('input.btn.btn-primary', {'type': 'submit', 'value': SubmissionModel.dirty ? 'Submit for Review' : 'Approve' }, ''),
+                m('span', ' '),
+                m('input.btn.btn-danger', {'type': 'submit', 'value': SubmissionModel.dirty ? 'Submit for Review' : 'Reject' }, ''),
                 m('span', ' '),
                 m('input.btn.btn-default', {'type': 'submit', 'value': 'Request Another Submission'}, '')
             ]);
