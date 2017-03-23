@@ -35,5 +35,7 @@ public class Values {
     // Used for indexing
     public static final String PATH = "path";
     public static final String TITLE = "title";
+    public static final String CONTENT = "content";
     public static final String DESCRIPTION = "description";
+    public static final String URL = "url";
 }

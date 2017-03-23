@@ -33,7 +33,7 @@ public class Searcher {
         this.contentDAO = Singleton.getContentDAO();
     }
 
-    public SearchResult search(String queryString, int page) {
+    public SearchResult search(String index, String queryString, int page) {
         SearchResult searchResult = null;
 
         try {
@@ -42,7 +42,7 @@ public class Searcher {
             Analyzer analyzer = new StandardAnalyzer();
 
             // Search over the titles only for the moment
-            QueryParser parser = new QueryParser(Values.TITLE, analyzer);
+            QueryParser parser = new QueryParser(index, analyzer);
             Query query = parser.parse(queryString);
 
             searchResult = this.doPagingSearch(reader, searcher, query, queryString, page);

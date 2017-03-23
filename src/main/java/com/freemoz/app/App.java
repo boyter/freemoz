@@ -81,6 +81,9 @@ public class App {
             path("/v1", () -> {
                 get("/categories/", ContentRoute::getCategories, new JsonTransformer());
                 get("/submission/", ContentRoute::getSubmission, new JsonTransformer());
+                get("/search/", SearchRoute::searchJson, new JsonTransformer());
+                get("/searchurl/", SearchRoute::searchUrlJson, new JsonTransformer());
+                get("/searchdescription/", SearchRoute::searchDescriptionJson, new JsonTransformer());
             });
         });
 

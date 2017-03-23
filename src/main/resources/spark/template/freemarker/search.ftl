@@ -8,7 +8,7 @@
 <input class="btn btn-default" type="submit" value="Search" />
 </form>
 
-<h2>Results for: <span style="color:#aaa;">${searchResult.query}</span></h2>
+<h2>${searchResult.numTotalHits} Results for: <span style="color:#aaa;">${searchResult.query}</span></h2>
 
 
 <#if searchResult.results?size == 0>

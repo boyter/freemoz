@@ -20,16 +20,9 @@ public class BreadCrumbDTOTest extends TestCase {
         }
     }
 
-//    public void testQueueFile() throws IOException {
-//        QueueFile queueFile = new QueueFile(new File("myqueue.queue"));
-//
-//        queueFile.add("this is a test".getBytes());
-//        byte[] peek = queueFile.peek();
-//        System.out.println(queueFile.size() + " " + new String(peek));
-//
-//        while(!queueFile.isEmpty()) {
-//            queueFile.remove();
-//        }
-//
-//    }
+    public void testSomethingElse() {
+        String t = "https://searchco.de/something/here.php?test".replaceAll("\\W+", " ");
+        System.out.println(t);
+    }
+
 }

@@ -52,10 +52,20 @@ public class Indexer {
                 Field pathField = new StringField(Values.PATH, primaryKey, Field.Store.YES);
                 doc.add(pathField);
 
-                doc.add(new TextField("title", contentDTO.getTitle().toLowerCase(), Field.Store.NO));
-                doc.add(new TextField("description", contentDTO.getDescription().toLowerCase(), Field.Store.NO));
-                doc.add(new TextField("topics", contentDTO.getTopic().replace("//", " ").replace("_", " "), Field.Store.NO));
-                doc.add(new TextField("url", contentDTO.getUrl().replace(".", " "), Field.Store.NO));
+
+                StringBuffer stringBuffer = new StringBuffer();
+                stringBuffer.append(contentDTO.getTitle().toLowerCase()).append(" ");
+                stringBuffer.append(contentDTO.getDescription().toLowerCase()).append(" ");
+                stringBuffer.append(contentDTO.getDescription().toLowerCase()).append(" ");
+                stringBuffer.append(contentDTO.getTopic().replace("/", " ").replace("_", " ")).append(" ");
+                stringBuffer.append(contentDTO.getUrl().replaceAll("\\W+", " ")).append(" ");
+
+
+                doc.add(new TextField(Values.CONTENT, stringBuffer.toString(), Field.Store.NO));
+                doc.add(new TextField(Values.TITLE, contentDTO.getTitle().toLowerCase(), Field.Store.NO));
+                doc.add(new TextField(Values.DESCRIPTION, contentDTO.getDescription().toLowerCase(), Field.Store.NO));
+                doc.add(new TextField("topics", contentDTO.getTopic().replace("/", " ").replace("_", " "), Field.Store.NO));
+                doc.add(new TextField(Values.URL, contentDTO.getUrl().replaceAll("\\W+", " "), Field.Store.NO));
 
 
                 writer.updateDocument(new Term(Values.PATH, primaryKey), doc);

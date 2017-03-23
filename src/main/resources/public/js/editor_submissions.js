@@ -1,3 +1,83 @@
+var VectorSpace = {
+    buildConcordance: function(string) {
+        string = string.toLowerCase();
+        string = string.replace(/\W+/g, ' ');
+        string = string.replace(/\s+/g, ' ');
+
+        var concordance = {};
+
+        var split = string.split(' ');
+
+        for(var i = 0; i < split.length; i++) {
+            if (concordance[split[i]] === undefined) {
+                concordance[split[i]] = 1;
+            }
+            else {
+                concordance[split[i]] = concordance[split[i]] + 1;
+            }
+        }
+
+        return concordance;
+    },
+    magnitude: function(concordance) {
+        var total = 0;
+
+        for(var key in concordance) {
+            total += Math.pow(concordance[key], 2);
+        }
+
+        return Math.sqrt(total);
+    }
+}
+
+
+var SearchModel = {
+    resultsUrl: [],
+    resultsTitle: [],
+    resultsDescription: [],
+    getSimilarByUrl: function(searchterm) {
+        searchterm = searchterm.replace(/\W+/g, ' ');
+        m.request({method: 'GET', url: '/api/v1/searchurl/?q=' + encodeURIComponent(searchterm)}).then(function(e) {
+            if (e && e.results) {
+                SearchModel.resultsUrl = e.results;
+            }
+        });
+    },
+    getSimilarByTitle: function(searchterm) {
+        searchterm = searchterm.replace(/\W+/g, ' ');
+        m.request({method: 'GET', url: '/api/v1/search/?q=' + encodeURIComponent(searchterm)}).then(function(e) {
+            if (e && e.results) {
+                SearchModel.resultsTitle = e.results;
+            }
+        });
+    },
+    getSimilarByDescription: function(searchterm) {
+        searchterm = searchterm.replace(/\W+/g, ' ');
+        m.request({method: 'GET', url: '/api/v1/searchdescription/?q=' + encodeURIComponent(searchterm)}).then(function(e) {
+            if (e && e.results) {
+                SearchModel.resultsDescription = e.results;
+            }
+        });
+    },
+    getPossibleDuplicates: function() {
+        var result = _.first(SearchModel.resultsTitle, 5).concat(
+            _.first(SearchModel.resultsUrl, 5)
+        ).concat(
+            _.first(SearchModel.resultsDescription, 5)
+        );
+
+        result = _.uniq(result);
+
+        result.sort(
+          function(x, y) {
+             return x - y;
+          }
+        );
+
+        return result;
+    }
+};
+
 var SubmissionModel = {
     currentlyloading: false,
     dirty: false,
@@ -11,14 +91,17 @@ var SubmissionModel = {
     updateUrl: function(value) {
         SubmissionModel.dirty = true; 
         SubmissionModel.url = value;
+        SearchModel.getSimilarByUrl(SubmissionModel.url);
     },
     updateTitle: function(value) {
         SubmissionModel.dirty = true; 
         SubmissionModel.title = value;
+        SearchModel.getSimilarByTitle(SubmissionModel.title);
     },
     updateDescription: function(value) {
         SubmissionModel.dirty = true; 
         SubmissionModel.description = value;
+        SearchModel.getSimilarByDescription(SubmissionModel.description);
     },
     updateTags: function(value) {
         SubmissionModel.dirty = true; 
@@ -32,8 +115,11 @@ var SubmissionModel = {
         m.request({method: 'GET', url: '/api/v1/submission/'}).then(function(e) {
             SubmissionModel.currentlyloading = false;
             SubmissionModel.url = e.url;
+            SearchModel.getSimilarByUrl(e.url);
             SubmissionModel.title = e.title;
+            SearchModel.getSimilarByTitle(e.title);
             SubmissionModel.description = e.description;
+            SearchModel.getSimilarByDescription(SubmissionModel.description);
             SubmissionModel.tags = e.tags;
             SubmissionModel.dirty = false;
             SubmissionModel.countdown = 300;
@@ -64,7 +150,7 @@ var MainComponent = {
         return m('div', [
                 m('div', [
                     m('h4', 'Preview of Submission'),
-                    m('div.sample-display', 
+                    m('div.sample-display', [ 
                         m('dl', [
                             m('dt', [
                                 m('span.glyphicon glyphicon-list-alt'),
@@ -78,8 +164,17 @@ var MainComponent = {
                                 m('br'),
                                 m('small', SubmissionModel.tags)
                             ])
-                        ])
-                    )
+                        ]),
+                        m('p', [
+                            m('small', 'Possible Duplicates '),
+                            _.map(SearchModel.getPossibleDuplicates(), function(res, ind) {
+                                return m('small', [
+                                    m('a', { href: res.url }, res.title + ' (' +  res.url + ')'),
+                                    m('span', ' ')
+                                ])
+                            })
+                        ]),
+                    ])
                 ]),
                 m('div.alert.alert-info', {role: 'alert'}, [
                     m('span.glyphicon.glyphicon-time', ''),

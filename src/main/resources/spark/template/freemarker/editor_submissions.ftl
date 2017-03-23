@@ -6,5 +6,6 @@
 <div class="submissions"></div>
 
 <script language="javascript" type="text/javascript" src="/js/mithril.min.js"></script>
+<script language="javascript" type="text/javascript" src="/js/underscore.min.js"></script>
 <script language="javascript" type="text/javascript" src="/js/editor_submissions.js"></script>
 </@layout.masterTemplate>
