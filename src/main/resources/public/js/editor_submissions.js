@@ -5,13 +5,13 @@ var VectorSpace = {
             return VectorSpace.cache[string];
         }
 
-        string = string.toLowerCase();
-        string = string.replace(/\W+/g, ' ');
-        string = string.replace(/\s+/g, ' ');
+        newstring = string.toLowerCase();
+        newstring = newstring.replace(/\W+/g, ' ');
+        newstring = newstring.replace(/\s+/g, ' ');
 
         var concordance = {};
 
-        var split = string.split(' ');
+        var split = newstring.split(' ');
 
         for (var i = 0; i < split.length; i++) {
             if (concordance[split[i]] === undefined) {
@@ -55,7 +55,6 @@ var VectorSpace = {
     }
 }
 
-
 var SearchModel = {
     resultsUrl: [],
     resultsTitle: [],
@@ -91,7 +90,7 @@ var SearchModel = {
             _.first(SearchModel.resultsDescription, 5)
         );
 
-        result = _.uniq(result);
+        result = _.first(_.uniq(result), 10);
 
         result.sort(
             function(x, y) {
@@ -178,6 +177,10 @@ var MainComponent = {
     view: function() {
         return m('div', [
                 m('div', [
+                    m('div.alert.alert-info', {role: 'alert'}, [
+                        m('span.glyphicon.glyphicon-time', ''),
+                        m('span', ' You can edit/approve this submission for another ' + SubmissionModel.countdown + ' seconds before it is returned to the queue.')
+                    ]),
                     m('h4', 'Preview of Submission'),
                     m('div.sample-display', [ 
                         m('dl', [
@@ -186,11 +189,12 @@ var MainComponent = {
                                 m('a', {
                                     'href': SubmissionModel.url, 
                                     'target': '_new'
-                                }, ' ' + SubmissionModel.title),
-                                m('small', ' (' + SubmissionModel.url + ')')
+                                }, ' ' + SubmissionModel.title)
                             ]),
                             m('dd', [
                                 m('span', SubmissionModel.description),
+                                m('br'),
+                                m('small', SubmissionModel.url),
                                 m('br'),
                                 m('small', SubmissionModel.tags)
                             ])
@@ -198,7 +202,7 @@ var MainComponent = {
                     ])
                 ]),
                 m('p', [
-                    m('small', 'Possible Duplicates '),
+                    m('p', 'Possible Duplicates '),
                     m('ul', _.map(SearchModel.getPossibleDuplicates(), function(res, ind) {
                         return m('li', 
                             m('small', [
@@ -207,11 +211,6 @@ var MainComponent = {
                             ])
                         )
                     }))
-                ]),
-
-                m('div.alert.alert-info', {role: 'alert'}, [
-                    m('span.glyphicon.glyphicon-time', ''),
-                    m('span', ' You can edit/approve this submission for another ' + SubmissionModel.countdown + ' seconds before it is returned to the queue.')
                 ]),
                 m('div.form-group', [
                     m('label', 'Submission URL'),
