@@ -4,19 +4,20 @@ A spiritual sucessor to dmoz.org
 [![Build Status](https://circleci.com/gh/boyter/freemoz/tree/master.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/boyter/freemoz/tree/master)
 
 DONE
-- Ordered domain
-- Setup simple landing page
+- Ordered domain freemoz.org
 - Download existing dmoz data
 - Download slashtag data https://github.com/blekko/slashtag-data.git
 - Write down editorial guidelines / code of conduct / values probably based on http://contributor-covenant.org/version/1/4/
+
+
+TODO
 - Create basic application
 - Establish goals
 - Investigate https://github.com/kremso/dmoz-parser for parsing existing dmoz data
 - Build data converters
 - Add letsencrypt https cert https://certbot.eff.org/#ubuntuxenial-nginx
 - Setup website
-
-TODO
+- Setup simple landing page
 - Allow submissions IN PROGRESS
 - Add basic admin process to approve submissions needs to do the following,
   - Pop the next available submission from the queue and lock it for period of time
