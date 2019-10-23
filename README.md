@@ -50,7 +50,7 @@ Freemoz is a read heavy application. Delayed updates from edits are acceptable.
 
 No reliance on external services. As such it will do its own user management.
 
-Going to use Java 8 as the runtime envrionment using Spark (http://sparkjava.com/) framework. This means
-it will be possible to run Freemoz on any machine capable of running Java. Going to use SQLite
+Going to use Go as the language. This means
+it will be possible to run Freemoz on any machine. Going to use SQLite
 as the database. This means that there is no external database requirement, however in the interests
 of scale must ensure that it is possible to switch this out at a later date.
