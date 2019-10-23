@@ -8,10 +8,9 @@ DONE
 - Download existing dmoz data
 - Download slashtag data https://github.com/blekko/slashtag-data.git
 - Write down editorial guidelines / code of conduct / values probably based on http://contributor-covenant.org/version/1/4/
-
+- Create basic application
 
 TODO
-- Create basic application
 - Establish goals
 - Investigate https://github.com/kremso/dmoz-parser for parsing existing dmoz data
 - Build data converters
@@ -34,7 +33,6 @@ GOALS
 - Project must be forkable with minimum of effort
 - Self contained. Must be able to stand up a new instance of freemoz with minimum of effort
 
-
 ### License
 
 All code to be released under GNU GENERAL PUBLIC LICENSE Version 3
@@ -47,11 +45,7 @@ All content should be released under a Creative Commons License.
 
 To make freemoz self contained the following assumptions/solutions are going to be made.
 
-Freemoz is a read heavy application. Delayed updates from edits are acceptable.
+ - Freemoz is a read heavy application. Delayed updates from edits are acceptable.
+ - No reliance on external services. As such it will do its own user management.
 
-No reliance on external services. As such it will do its own user management.
-
-Going to use Go as the language. This means
-it will be possible to run Freemoz on any machine. Going to use SQLite
-as the database. This means that there is no external database requirement, however in the interests
-of scale must ensure that it is possible to switch this out at a later date.
+Going to use Go as the language. This means it will be possible to run Freemoz on any machine. Going to use SQLite as the database. This means that there is no external database requirement, however in the interests of scale must ensure that it is possible to switch this out at a later date.
