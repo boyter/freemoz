@@ -15,9 +15,10 @@ func main() {
 	errorLog := log.New(os.Stderr, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
 
 
-	data, err := Asset("./assets/public/js/script.js")
+	data, err := Asset("assets/public/js/script.js")
 	if err != nil {
 		// Asset was not found.
+		fmt.Println(err.Error())
 	}
 
 	fmt.Println(string(data))
