@@ -1,1 +1,1 @@
-this is some content
+alert('this is annoying');

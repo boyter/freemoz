@@ -33,6 +33,9 @@ GOALS
 - Project must be forkable with minimum of effort
 - Self contained. Must be able to stand up a new instance of freemoz with minimum of effort
 
+DECISIONS
+- Use https://github.com/go-bindata/go-bindata to allow single file deployment (with no content)
+
 ### License
 
 All code to be released under GNU GENERAL PUBLIC LICENSE Version 3
