@@ -10,3 +10,4 @@ freemoz
 *.log
 *.log.*
 logs/
+freemoz.db
