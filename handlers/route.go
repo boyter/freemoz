@@ -1,7 +1,8 @@
 package handlers
 
 import (
-	"github.com/boyter/pcs/data/mysql"
+	"github.com/boyter/freemoz/data/models"
+
 	//"github.com/golangcollege/sessions"
 	"github.com/gorilla/mux"
 	"log"
@@ -12,9 +13,9 @@ import (
 // web application. For now we'll only include fields for the two custom loggers, but
 // we'll add more to it as the build progresses.
 type Application struct {
-	ErrorLog     *log.Logger
-	InfoLog      *log.Logger
-	ProjectModel *mysql.ProjectModel
+	ErrorLog  *log.Logger
+	InfoLog   *log.Logger
+	UserModel *models.UserModel
 	//Session      *sessions.Session
 }
 

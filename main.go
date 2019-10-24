@@ -1,7 +1,8 @@
 package main
 
 import (
-	"fmt"
+	"github.com/boyter/freemoz/data"
+	"github.com/boyter/freemoz/data/models"
 	"github.com/boyter/freemoz/handlers"
 	//"github.com/golangcollege/sessions"
 	"log"
@@ -15,19 +16,19 @@ func main() {
 	errorLog := log.New(os.Stderr, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
 
 
-	data, err := Asset("assets/public/js/script.js")
-	if err != nil {
-		// Asset was not found.
-		fmt.Println(err.Error())
-	}
-
-	fmt.Println(string(data))
-
-	//db, err := data.ConnectDb()
+	//data, err := Asset("assets/public/js/script.js")
 	//if err != nil {
-	//	errorLog.Fatal(err)
+	//	// Asset was not found.
+	//	fmt.Println(err.Error())
 	//}
-	//defer db.Close()
+	//
+	//fmt.Println(string(data))
+
+	db, err := data.ConnectDb()
+	if err != nil {
+		errorLog.Fatal(err)
+	}
+	defer db.Close()
 
 	//session := sessions.New([]byte(""))
 	//session.Lifetime = 12 * time.Hour
@@ -36,6 +37,7 @@ func main() {
 	app := handlers.Application{
 		ErrorLog: errorLog,
 		InfoLog:  infoLog,
+		UserModel: &models.UserModel{DB: db},
 		//ProjectModel: &mysql.ProjectModel{DB: db},
 		//Session: session,
 	}
