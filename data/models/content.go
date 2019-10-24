@@ -33,6 +33,40 @@ func (m *ContentModel) GetById(id int) (*data.Content, error) {
 	return content, nil
 }
 
+func (m *ContentModel) GetSitesByTopic(topic string) ([]*data.Content, error) {
+	stmt := `
+		select id,parentid,topic,title,description,url 
+		from content 
+		where parentid = (select id from structure where topic = ? limit 1) 
+		order by title;
+`
+
+	rows, err := m.DB.Query(stmt, topic)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	structures := []*data.Content{}
+
+	for rows.Next() {
+		structure := &data.Content{}
+
+		err := rows.Scan(&structure.Id, &structure.ParentId, &structure.Topic)
+		if err != nil {
+			return nil, err
+		}
+
+		structures = append(structures, structure)
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return structures, nil
+}
+
 //func (m *ContentModel) GetSites() (*data.Content, error) {
 //	stmt := `
 //		SELECT	id,
