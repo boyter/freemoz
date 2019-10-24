@@ -43,7 +43,7 @@ func (app *Application) Home(w http.ResponseWriter, r *http.Request) {
 	// Initialize a slice containing the paths to the two files. Note that the
 	// home.page.tmpl file must be the *first* file in the slice.
 	files := []string{
-		//"./assets/public/html/home.page.tmpl",
+		"./assets/public/html/home.page.tmpl",
 		"./assets/public/html/base.layout.tmpl",
 		//"./assets/public/html/footer.partial.tmpl",
 	}
