@@ -38,7 +38,6 @@ func main() {
 		ErrorLog: errorLog,
 		InfoLog:  infoLog,
 		UserModel: &models.UserModel{DB: db},
-		//ProjectModel: &mysql.ProjectModel{DB: db},
 		//Session: session,
 	}
 
