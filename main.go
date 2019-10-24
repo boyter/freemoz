@@ -34,10 +34,11 @@ func main() {
 
 	// Initialize a new instance of application containing dependencies.
 	app := handlers.Application{
-		ErrorLog:     errorLog,
-		InfoLog:      infoLog,
-		UserModel:    &models.UserModel{DB: db},
-		ContentModel: &models.ContentModel{DB: db},
+		ErrorLog:       errorLog,
+		InfoLog:        infoLog,
+		UserModel:      &models.UserModel{DB: db},
+		ContentModel:   &models.ContentModel{DB: db},
+		StructureModel: &models.StructureModel{DB: db},
 		//Session: session,
 	}
 
