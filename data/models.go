@@ -57,3 +57,9 @@ type Content struct {
 	Description string
 	Url         string
 }
+
+type Structure struct {
+	Id       int
+	ParentId int
+	Topic    string
+}
