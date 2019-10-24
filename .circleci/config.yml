@@ -8,10 +8,7 @@ jobs: # basic units of work in a run
     # directory where steps are run. Path must conform to the Go Workspace requirements
     working_directory: /go/src/github.com/boyter/freemoz
 
-    environment: # environment variables for the build itself
-      TEST_RESULTS: /tmp/test-results # path to where test results will be saved
-
     steps: # steps that comprise the `build` job
       - checkout # check out source code to working directory
-      - run: go test ./...
+      - run: go test -v ./...
       - run: go build
