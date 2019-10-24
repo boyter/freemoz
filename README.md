@@ -3,6 +3,11 @@ A spiritual sucessor to dmoz.org
 
 [![CircleCI](https://circleci.com/gh/boyter/freemoz.svg?style=svg)](https://circleci.com/gh/boyter/freemoz)
 [![Go Report Card](https://goreportcard.com/badge/github.com/boyter/freemoz)](https://goreportcard.com/report/github.com/boyter/freemoz)
+[![Scc Count Badge](https://sloc.xyz/github/boyter/freemoz/?category=code)](https://github.com/boyter/freemoz/)
+[![Scc Count Badge](https://sloc.xyz/github/boyter/freemoz/?category=blanks)](https://github.com/boyter/freemoz/)
+[![Scc Count Badge](https://sloc.xyz/github/boyter/freemoz/?category=lines)](https://github.com/boyter/freemoz/)
+[![Scc Count Badge](https://sloc.xyz/github/boyter/freemoz/?category=comments)](https://github.com/boyter/freemoz/)
+[![Scc Count Badge](https://sloc.xyz/github/boyter/freemoz/?category=cocomo)](https://github.com/boyter/freemoz/)
 
 
 
