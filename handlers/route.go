@@ -13,9 +13,10 @@ import (
 // web application. For now we'll only include fields for the two custom loggers, but
 // we'll add more to it as the build progresses.
 type Application struct {
-	ErrorLog  *log.Logger
-	InfoLog   *log.Logger
-	UserModel *models.UserModel
+	ErrorLog     *log.Logger
+	InfoLog      *log.Logger
+	UserModel    *models.UserModel
+	ContentModel *models.ContentModel
 	//Session      *sessions.Session
 }
 

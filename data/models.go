@@ -48,3 +48,12 @@ func (u *User) HashPassword(password string) error {
 	u.HashedPassword = hashedPassword
 	return nil
 }
+
+type Content struct {
+	Id          int
+	ParentId    int
+	Topic       string
+	Title       string
+	Description string
+	Url         string
+}

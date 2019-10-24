@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"github.com/boyter/freemoz/data"
 )
+
 type UserModel struct {
 	DB *sql.DB
 }
