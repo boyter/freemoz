@@ -39,7 +39,7 @@ func (app *Application) Routes() *mux.Router {
 	//router.Handle("/user/login/", cookieMiddleware.ThenFunc(app.LoginUser)).Methods("POST")
 
 	// Setup to serve files from the supplied directory
-	fileServer := http.FileServer(http.Dir("./assets/public/static/"))
+	fileServer := http.FileServer(http.Dir("./assets/public/"))
 	router.PathPrefix("/static/").Handler(http.StripPrefix("/static", fileServer))
 
 	return router
