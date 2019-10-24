@@ -27,8 +27,7 @@ func (app *Application) LoginUser(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write([]byte("Attempt to login here"))
 }
 
-// Define a home handler function which writes a byte slice containing
-// "Hello from Portfold" as the response body.
+// Define a home handler function
 func (app *Application) Home(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		http.NotFound(w, r)
@@ -44,9 +43,9 @@ func (app *Application) Home(w http.ResponseWriter, r *http.Request) {
 	// Initialize a slice containing the paths to the two files. Note that the
 	// home.page.tmpl file must be the *first* file in the slice.
 	files := []string{
-		"./assets/ui/html/home.page.tmpl",
-		"./assets/ui/html/base.layout.tmpl",
-		"./assets/ui/html/footer.partial.tmpl",
+		//"./assets/public/html/home.page.tmpl",
+		"./assets/public/html/base.layout.tmpl",
+		//"./assets/public/html/footer.partial.tmpl",
 	}
 
 	ts, err := template.ParseFiles(files...)
