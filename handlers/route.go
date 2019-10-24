@@ -34,6 +34,7 @@ func (app *Application) Routes() *mux.Router {
 	router.Handle("/", http.HandlerFunc(app.Home)).Methods("GET")
 	router.Handle("/help/", http.HandlerFunc(app.Help)).Methods("GET")
 	router.Handle("/health-check/", http.HandlerFunc(app.HealthCheck)).Methods("GET")
+	router.Handle("", http.HandlerFunc(app.Home)).Methods("GET")
 
 	// User login
 	//router.Handle("/user/login/", cookieMiddleware.ThenFunc(app.LoginForm)).Methods("GET")
