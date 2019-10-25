@@ -1,5 +1,5 @@
 The files in here are used to convert the DMOZ data dumps into something useful. They need to be run with
-https://github.com/kremso/dmoz-parser 
+https://github.com/kremso/dmoz-parser OR https://github.com/boyter/dmoz-parser (cloned for safe keeping)
 
 To build the database you need to first do the following,
 
