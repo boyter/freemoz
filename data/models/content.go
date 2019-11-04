@@ -35,10 +35,10 @@ func (m *ContentModel) GetById(id int) (*data.Content, error) {
 
 func (m *ContentModel) GetSitesByTopic(topic string) ([]*data.Content, error) {
 	stmt := `
-		select id,parentid,topic,title,description,url 
-		from content 
-		where parentid = (select id from structure where topic = ? limit 1) 
-		order by title;
+		SELECT id,parentid,topic,title,description,url 
+		FROM content 
+		WHERE parentid = (select id from structure where topic = ? limit 1) 
+		ORDER BY title;
 `
 
 	rows, err := m.DB.Query(stmt, topic)

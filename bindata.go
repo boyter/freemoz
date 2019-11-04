@@ -1095,68 +1095,68 @@ type bintree struct {
 }
 
 var _bintree = &bintree{nil, map[string]*bintree{
-	"assets": &bintree{nil, map[string]*bintree{
-		"public": &bintree{nil, map[string]*bintree{
-			"css": &bintree{nil, map[string]*bintree{
-				"bootstrap": &bintree{nil, map[string]*bintree{
-					"css": &bintree{nil, map[string]*bintree{
-						"bootstrap-theme.css":     &bintree{assetsPublicCssBootstrapCssBootstrapThemeCss, map[string]*bintree{}},
-						"bootstrap-theme.min.css": &bintree{assetsPublicCssBootstrapCssBootstrapThemeMinCss, map[string]*bintree{}},
-						"bootstrap.css":           &bintree{assetsPublicCssBootstrapCssBootstrapCss, map[string]*bintree{}},
-						"bootstrap.min.css":       &bintree{assetsPublicCssBootstrapCssBootstrapMinCss, map[string]*bintree{}},
+	"assets": {nil, map[string]*bintree{
+		"public": {nil, map[string]*bintree{
+			"css": {nil, map[string]*bintree{
+				"bootstrap": {nil, map[string]*bintree{
+					"css": {nil, map[string]*bintree{
+						"bootstrap-theme.css":     {assetsPublicCssBootstrapCssBootstrapThemeCss, map[string]*bintree{}},
+						"bootstrap-theme.min.css": {assetsPublicCssBootstrapCssBootstrapThemeMinCss, map[string]*bintree{}},
+						"bootstrap.css":           {assetsPublicCssBootstrapCssBootstrapCss, map[string]*bintree{}},
+						"bootstrap.min.css":       {assetsPublicCssBootstrapCssBootstrapMinCss, map[string]*bintree{}},
 					}},
-					"fonts": &bintree{nil, map[string]*bintree{
-						"glyphicons-halflings-regular.eot":  &bintree{assetsPublicCssBootstrapFontsGlyphiconsHalflingsRegularEot, map[string]*bintree{}},
-						"glyphicons-halflings-regular.svg":  &bintree{assetsPublicCssBootstrapFontsGlyphiconsHalflingsRegularSvg, map[string]*bintree{}},
-						"glyphicons-halflings-regular.ttf":  &bintree{assetsPublicCssBootstrapFontsGlyphiconsHalflingsRegularTtf, map[string]*bintree{}},
-						"glyphicons-halflings-regular.woff": &bintree{assetsPublicCssBootstrapFontsGlyphiconsHalflingsRegularWoff, map[string]*bintree{}},
+					"fonts": {nil, map[string]*bintree{
+						"glyphicons-halflings-regular.eot":  {assetsPublicCssBootstrapFontsGlyphiconsHalflingsRegularEot, map[string]*bintree{}},
+						"glyphicons-halflings-regular.svg":  {assetsPublicCssBootstrapFontsGlyphiconsHalflingsRegularSvg, map[string]*bintree{}},
+						"glyphicons-halflings-regular.ttf":  {assetsPublicCssBootstrapFontsGlyphiconsHalflingsRegularTtf, map[string]*bintree{}},
+						"glyphicons-halflings-regular.woff": {assetsPublicCssBootstrapFontsGlyphiconsHalflingsRegularWoff, map[string]*bintree{}},
 					}},
-					"js": &bintree{nil, map[string]*bintree{
-						"bootstrap.js":     &bintree{assetsPublicCssBootstrapJsBootstrapJs, map[string]*bintree{}},
-						"bootstrap.min.js": &bintree{assetsPublicCssBootstrapJsBootstrapMinJs, map[string]*bintree{}},
+					"js": {nil, map[string]*bintree{
+						"bootstrap.js":     {assetsPublicCssBootstrapJsBootstrapJs, map[string]*bintree{}},
+						"bootstrap.min.js": {assetsPublicCssBootstrapJsBootstrapMinJs, map[string]*bintree{}},
 					}},
 				}},
-				"style.css": &bintree{assetsPublicCssStyleCss, map[string]*bintree{}},
+				"style.css": {assetsPublicCssStyleCss, map[string]*bintree{}},
 			}},
-			"img": &bintree{nil, map[string]*bintree{
-				"icons": &bintree{nil, map[string]*bintree{
-					"arts.png":       &bintree{assetsPublicImgIconsArtsPng, map[string]*bintree{}},
-					"business.png":   &bintree{assetsPublicImgIconsBusinessPng, map[string]*bintree{}},
-					"computers.png":  &bintree{assetsPublicImgIconsComputersPng, map[string]*bintree{}},
-					"games.png":      &bintree{assetsPublicImgIconsGamesPng, map[string]*bintree{}},
-					"health.png":     &bintree{assetsPublicImgIconsHealthPng, map[string]*bintree{}},
-					"home.png":       &bintree{assetsPublicImgIconsHomePng, map[string]*bintree{}},
-					"news.png":       &bintree{assetsPublicImgIconsNewsPng, map[string]*bintree{}},
-					"recreation.png": &bintree{assetsPublicImgIconsRecreationPng, map[string]*bintree{}},
-					"reference.png":  &bintree{assetsPublicImgIconsReferencePng, map[string]*bintree{}},
-					"regional.png":   &bintree{assetsPublicImgIconsRegionalPng, map[string]*bintree{}},
-					"science.png":    &bintree{assetsPublicImgIconsSciencePng, map[string]*bintree{}},
-					"shopping.png":   &bintree{assetsPublicImgIconsShoppingPng, map[string]*bintree{}},
-					"society.png":    &bintree{assetsPublicImgIconsSocietyPng, map[string]*bintree{}},
-					"sports.png":     &bintree{assetsPublicImgIconsSportsPng, map[string]*bintree{}},
-					"world.png":      &bintree{assetsPublicImgIconsWorldPng, map[string]*bintree{}},
+			"img": {nil, map[string]*bintree{
+				"icons": {nil, map[string]*bintree{
+					"arts.png":       {assetsPublicImgIconsArtsPng, map[string]*bintree{}},
+					"business.png":   {assetsPublicImgIconsBusinessPng, map[string]*bintree{}},
+					"computers.png":  {assetsPublicImgIconsComputersPng, map[string]*bintree{}},
+					"games.png":      {assetsPublicImgIconsGamesPng, map[string]*bintree{}},
+					"health.png":     {assetsPublicImgIconsHealthPng, map[string]*bintree{}},
+					"home.png":       {assetsPublicImgIconsHomePng, map[string]*bintree{}},
+					"news.png":       {assetsPublicImgIconsNewsPng, map[string]*bintree{}},
+					"recreation.png": {assetsPublicImgIconsRecreationPng, map[string]*bintree{}},
+					"reference.png":  {assetsPublicImgIconsReferencePng, map[string]*bintree{}},
+					"regional.png":   {assetsPublicImgIconsRegionalPng, map[string]*bintree{}},
+					"science.png":    {assetsPublicImgIconsSciencePng, map[string]*bintree{}},
+					"shopping.png":   {assetsPublicImgIconsShoppingPng, map[string]*bintree{}},
+					"society.png":    {assetsPublicImgIconsSocietyPng, map[string]*bintree{}},
+					"sports.png":     {assetsPublicImgIconsSportsPng, map[string]*bintree{}},
+					"world.png":      {assetsPublicImgIconsWorldPng, map[string]*bintree{}},
 				}},
 			}},
-			"js": &bintree{nil, map[string]*bintree{
-				"editor_submissions.js": &bintree{assetsPublicJsEditor_submissionsJs, map[string]*bintree{}},
-				"mithril.min.js":        &bintree{assetsPublicJsMithrilMinJs, map[string]*bintree{}},
-				"script.js":             &bintree{assetsPublicJsScriptJs, map[string]*bintree{}},
-				"underscore.min.js":     &bintree{assetsPublicJsUnderscoreMinJs, map[string]*bintree{}},
+			"js": {nil, map[string]*bintree{
+				"editor_submissions.js": {assetsPublicJsEditor_submissionsJs, map[string]*bintree{}},
+				"mithril.min.js":        {assetsPublicJsMithrilMinJs, map[string]*bintree{}},
+				"script.js":             {assetsPublicJsScriptJs, map[string]*bintree{}},
+				"underscore.min.js":     {assetsPublicJsUnderscoreMinJs, map[string]*bintree{}},
 			}},
-			"template": &bintree{nil, map[string]*bintree{
-				"freemarker": &bintree{nil, map[string]*bintree{
-					"404.ftl":                &bintree{assetsPublicTemplateFreemarker404Ftl, map[string]*bintree{}},
-					"about.ftl":              &bintree{assetsPublicTemplateFreemarkerAboutFtl, map[string]*bintree{}},
-					"become.ftl":             &bintree{assetsPublicTemplateFreemarkerBecomeFtl, map[string]*bintree{}},
-					"category.ftl":           &bintree{assetsPublicTemplateFreemarkerCategoryFtl, map[string]*bintree{}},
-					"editor_admin.ftl":       &bintree{assetsPublicTemplateFreemarkerEditor_adminFtl, map[string]*bintree{}},
-					"editor_submissions.ftl": &bintree{assetsPublicTemplateFreemarkerEditor_submissionsFtl, map[string]*bintree{}},
-					"index.ftl":              &bintree{assetsPublicTemplateFreemarkerIndexFtl, map[string]*bintree{}},
-					"login.ftl":              &bintree{assetsPublicTemplateFreemarkerLoginFtl, map[string]*bintree{}},
-					"masterTemplate.ftl":     &bintree{assetsPublicTemplateFreemarkerMastertemplateFtl, map[string]*bintree{}},
-					"search.ftl":             &bintree{assetsPublicTemplateFreemarkerSearchFtl, map[string]*bintree{}},
-					"suggest.ftl":            &bintree{assetsPublicTemplateFreemarkerSuggestFtl, map[string]*bintree{}},
-					"suggest_success.ftl":    &bintree{assetsPublicTemplateFreemarkerSuggest_successFtl, map[string]*bintree{}},
+			"template": {nil, map[string]*bintree{
+				"freemarker": {nil, map[string]*bintree{
+					"404.ftl":                {assetsPublicTemplateFreemarker404Ftl, map[string]*bintree{}},
+					"about.ftl":              {assetsPublicTemplateFreemarkerAboutFtl, map[string]*bintree{}},
+					"become.ftl":             {assetsPublicTemplateFreemarkerBecomeFtl, map[string]*bintree{}},
+					"category.ftl":           {assetsPublicTemplateFreemarkerCategoryFtl, map[string]*bintree{}},
+					"editor_admin.ftl":       {assetsPublicTemplateFreemarkerEditor_adminFtl, map[string]*bintree{}},
+					"editor_submissions.ftl": {assetsPublicTemplateFreemarkerEditor_submissionsFtl, map[string]*bintree{}},
+					"index.ftl":              {assetsPublicTemplateFreemarkerIndexFtl, map[string]*bintree{}},
+					"login.ftl":              {assetsPublicTemplateFreemarkerLoginFtl, map[string]*bintree{}},
+					"masterTemplate.ftl":     {assetsPublicTemplateFreemarkerMastertemplateFtl, map[string]*bintree{}},
+					"search.ftl":             {assetsPublicTemplateFreemarkerSearchFtl, map[string]*bintree{}},
+					"suggest.ftl":            {assetsPublicTemplateFreemarkerSuggestFtl, map[string]*bintree{}},
+					"suggest_success.ftl":    {assetsPublicTemplateFreemarkerSuggest_successFtl, map[string]*bintree{}},
 				}},
 			}},
 		}},

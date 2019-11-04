@@ -7,9 +7,9 @@ import (
 )
 
 type templateData struct {
-	GroupName               string
-	ProjectName             string
-	ProjectPath             string
+	GroupName   string
+	ProjectName string
+	ProjectPath string
 }
 
 func (app *Application) LoginForm(w http.ResponseWriter, r *http.Request) {
@@ -58,8 +58,7 @@ func (app *Application) Home(w http.ResponseWriter, r *http.Request) {
 	// We then use the Execute() method on the template set to write the template
 	// content as the response body. The last parameter to Execute() represents any
 	// dynamic data that we want to pass in, which for now we'll leave as nil.
-	err = ts.Execute(w, templateData{
-	})
+	err = ts.Execute(w, templateData{})
 
 	if err != nil {
 		app.ErrorLog.Println(err.Error())
@@ -74,4 +73,3 @@ func (app *Application) Help(w http.ResponseWriter, r *http.Request) {
 func (app *Application) HealthCheck(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write([]byte("health check"))
 }
-
