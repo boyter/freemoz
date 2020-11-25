@@ -6,56 +6,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Freemoz.org a spiritual sucessor to dmoz.org</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/mvp.css">
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
     <link rel='shortcut icon' type='image/x-icon' href='/static/img/favicon.ico' />
     <script language="javascript" type="text/javascript" src="/static/js/script.js"></script>
   </head>
   <body>
 
-    <div class="container">
-      <!-- Static navbar -->
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Freemoz</a>
-          </div>
-          <form class="navbar-form navbar-left" method="GET" action="/search/">
-            <div class="form-group">
-              <input type="text" class="form-control" name="q" placeholder="Search Freemoz">
-              <input class="hidden" type="submit" />
-            </div>
-            <button type="submit" class="btn btn-default">Search</button>
-          </form>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/about/">About</a></li>
-              <li><a href="/become/">Become an Editor</a></li>
-              <li><a href="/suggest/">Suggest a Site</a></li>
-              <li><a href="/login/">Login</a></li>
+    <header>
+        <nav>
+            <a href="https://freemoz.org/"><img alt="Freemoz" src="./img/logo.png" height="70"></a>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/become/">Become an Editor</a></li>
+                <li><a href="/suggest/">Suggest a Site</a></li>
+                <li><a href="/login/">Login</a></li>
+                <li><a href="https://github.com/boyter/freemoz" target="_blank">GitHub &nearr;</a>
             </ul>
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-      </nav>
+        </nav>
+        <h1>Welcome to <u>Freemoz.org</u> a spiritual successor to dmoz.org</h1>
+        <p>100% <b>open</b> and available forever</p>
+      </header>
 
-      <a href="https://github.com/boyter/freemoz"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/8b6b8ccc6da3aa5722903da7b58eb5ab1081adee/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png"></a>
-
-
+    <main>
       <!-- Content here -->
        {{template "body" .}}
 
-
-      <div style="border-top: 1px solid #eee; padding-top:5px; margin-top:20px;">
-      <a href="https://github.com/boyter/freemoz">Free Software under GNU GPL 3.0 License</a> |
-      <a href="https://www.elegantthemes.com/blog/freebie-of-the-week/beautiful-flat-icons-for-free">Icons under GNU GPL 2.0 License</a> |
-      <a href="https://creativecommons.org/licenses/by/3.0/">Content under Creative Commons Attribution 3.0 Unported License</a>
-      </div>
+      <p>
+          <a href="https://github.com/boyter/freemoz">Free Software under GNU AGPL 3.0 License</a> |
+          <a href="https://www.elegantthemes.com/blog/freebie-of-the-week/beautiful-flat-icons-for-free">Icons under GNU GPL 2.0 License</a> |
+          <a href="https://creativecommons.org/licenses/by/3.0/">Content under Creative Commons Attribution 3.0 Unported License</a>
+      </p>
       <!-- <div style="margin-top:20px;"> -->
           <!-- Requirement as per terms of DMOZ licence http://rdf.dmoz.org/ -->
           <!-- <center>
@@ -78,7 +60,7 @@
           </table>
           </center> -->
       <!-- </div> -->
-    </div> <!-- /container -->
+    </main>
   </body>
 </html>
 {{end}}

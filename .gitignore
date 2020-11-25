@@ -11,3 +11,4 @@ freemoz
 *.log.*
 logs/
 freemoz.db
+.DS_Store
