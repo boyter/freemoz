@@ -1,0 +1,10 @@
+# github.com/gorilla/mux v1.7.3
+## explicit
+github.com/gorilla/mux
+# github.com/mattn/go-sqlite3 v1.11.0
+## explicit
+github.com/mattn/go-sqlite3
+# golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550
+## explicit
+golang.org/x/crypto/bcrypt
+golang.org/x/crypto/blowfish
