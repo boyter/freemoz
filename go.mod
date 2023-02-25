@@ -6,5 +6,5 @@ require (
 	github.com/gorilla/mux v1.7.3
 	github.com/mattn/go-sqlite3 v1.11.0
 	github.com/rs/zerolog v1.20.0
-	golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550
+	golang.org/x/crypto v0.1.0
 )
